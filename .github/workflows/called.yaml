@@ -1,0 +1,35 @@
+name: Reusable Workflow
+
+on:
+  # push:
+  workflow_dispatch:
+    inputs:
+      username:
+        required: true
+        type: string
+  workflow_call:
+    inputs:
+      username:
+        required: true
+        type: string
+        
+jobs:
+  reusable_workflow_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: aaaa
+        run: | 
+          echo aaaa 
+
+      - name: Post to Slack channel
+        id: slack
+        if: always()
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
+          payload: |
+            {
+              "text": "aaaaa, ${{ inputs.username }}",
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
