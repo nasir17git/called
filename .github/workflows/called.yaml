@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: aaaa
-        if: ${{ inputs.choice }}
+        if: inputs.choice
         run: | 
           echo "done=running!" >> $GITHUB_ENV
 
