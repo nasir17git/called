@@ -1,25 +1,32 @@
 name: Reusable Workflow
 
 on:
-  # push:
-  workflow_dispatch:
-    inputs:
-      username:
-        required: true
-        type: string
   workflow_call:
     inputs:
       username:
         required: true
         type: string
+      choice:
+        required: true
+        type: boolean
+      sentence:
+        required: true
+        type: string
+      
         
 jobs:
   reusable_workflow_job:
     runs-on: ubuntu-latest
     steps:
       - name: aaaa
+        if: ${{ inputs.choice }}
         run: | 
-          echo aaaa 
+          echo "done=running!" >> $GITHUB_ENV
+
+      - name: bbb
+        run: | 
+          echo "choice=${{ inputs.choice }}" >> $GITHUB_ENV
+
 
       - name: Post to Slack channel
         id: slack
@@ -29,7 +36,7 @@ jobs:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
           payload: |
             {
-              "text": "aaaaaa ${{ inputs.username }}",
+              "text": "${{ inputs.username }}, 1 ${{ env.done }}, 2 ${{ env.choice }} 3 ${{ inputs.choice }} ",
               "attachments": [
                 {
                   "color": "good",
