@@ -45,9 +45,9 @@ jobs:
           echo $usedSec
           convertedTime=$(date -u -d "@$usedSec" +"%Hh %Mm %Ss")
           echo $convertedTime
-          echo "total_time=$(convertedTime)" >> $GITHUB_ENV
+          echo "total_time=$convertedTime" >> $GITHUB_ENV
           echo $total_time
-          # echo ${{env.total_time}}
+          echo ${{env.total_time}}
 
       - name: Post to Slack channel
         id: slack
