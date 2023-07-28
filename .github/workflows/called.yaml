@@ -79,9 +79,23 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "bbbb"
+                        "text": "1- '<${{ github.event.repository.html_url }}/commits/${{ github.sha }}|${{ github.event.head_commit.message }} - ${{ env.github_sha_short }}>'"
                       }
-                    }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "'2- <${{ github.event.repository.html_url }}/commits/${{ github.sha }}|'${{ github.event.head_commit.message }} - ${{ env.github_sha_short }}'>'"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": 3- "<${{ github.event.repository.html_url }}/commits/${{ github.sha }}|'${{ github.event.head_commit.message }} - ${{ env.github_sha_short }}'>"
+                      }
+                    },
                   ]
                 }
               ]
