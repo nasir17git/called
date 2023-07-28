@@ -83,7 +83,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "aaaaa"
+                        "text": "<${{ github.event.repository.html_url }}/commits/${{ github.sha }}|text>"
                       }
                     }
                   ]
