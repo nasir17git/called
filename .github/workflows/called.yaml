@@ -16,7 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
+      - name: Get Short SHA
+        run: |
+          echo "github_sha_short=${GITHUB_SHA::7}" >> $GITHUB_ENV
       - name: aaaa
         if: inputs.NEED_MYSQL
         run: | 
@@ -49,6 +51,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           sleep 2
+          message=$(git --no-pager log --pretty=format:'%s' -n 1)
+          echo "message=$message" >> $GITHUB_ENV
           createdAt=$(gh run list --json databaseId,createdAt --jq ".[]|select(.databaseId==${{ github.run_id }})|.createdAt")
           echo $createdAt
           usedSec=$(( `date +%s` - `date -d "$createdAt" +%s`  ))
@@ -79,23 +83,16 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "1- '<${{ github.event.repository.html_url }}/commits/${{ github.sha }}|${{ github.event.head_commit.message }} - ${{ env.github_sha_short }}>'"
+                        "text": "1- '<${{ github.event.repository.html_url }}/commits/${{ github.sha }}|${{ env.message }} - ${{ env.github_sha_short }}>'"
                       }
                     },
                     {
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "'2- <${{ github.event.repository.html_url }}/commits/${{ github.sha }}|'${{ github.event.head_commit.message }} - ${{ env.github_sha_short }}'>'"
+                        "text": "'2- <${{ github.event.repository.html_url }}/commits/${{ github.sha }}|'${{ env.message }} - ${{ env.github_sha_short }}'>'"
                       }
-                    },
-                    {
-                      "type": "section",
-                      "text": {
-                        "type": "mrkdwn",
-                        "text": 3- "<${{ github.event.repository.html_url }}/commits/${{ github.sha }}|'${{ github.event.head_commit.message }} - ${{ env.github_sha_short }}'>"
-                      }
-                    },
+                    }
                   ]
                 }
               ]
