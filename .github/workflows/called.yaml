@@ -30,6 +30,19 @@ jobs:
         run: | 
           echo "check=env works" >> $GITHUB_ENV
 
+      - name: slack_message_for_master_fail
+        id: pre_slack
+        if: failure()
+        run: |
+          if [[ "${{ job.status }}" == "success" ]]; then
+            echo "color=#36a64f" >> $GITHUB_ENV
+            echo "job_emoji=:white_check_mark:" >> $GITHUB_ENV
+          else
+            echo "color=#a63636" >> $GITHUB_ENV
+            echo "job_emoji=:x:" >> $GITHUB_ENV
+          fi
+
+
       - name: total_time
         id: total_time
         env:
@@ -45,6 +58,9 @@ jobs:
           echo "total_time=$convertedTime" >> $GITHUB_ENV
           echo $total_time
           echo ${{ env.total_time }}
+          env
+          echo "----------"
+          echo $GITHUB_ENV
 
       - name: Post to Slack channel
         id: slack
@@ -54,7 +70,7 @@ jobs:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
           payload: |
             {
-              "text": "${{ inputs.APP_NAME }}, 1 ${{ env.done }}, 2 ${{ env.choice }} 3 ${{ inputs.choice }} 4 ${{ env.total_time }} 5 ${{env.check}}",
+              "text": "${{ job.status }}, ${{ env.job_emoji }}, ${{ inputs.APP_NAME }}, 1 ${{ env.done }}, 2 ${{ env.choice }} 3 ${{ inputs.choice }} 4 ${{ env.total_time }} 5 ${{env.check}}",
               "attachments": [
                 {
                   "color": "#36a64f",
