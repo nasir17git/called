@@ -30,7 +30,22 @@ jobs:
       - name: simple
         run: | 
           echo "check=env works" >> $GITHUB_ENV
-          
+
+      - name: total_time
+        id: total_time
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          sleep 2
+          createdAt=$(gh run list --json databaseId,createdAt --jq ".[]|select(.databaseId==${{ github.run_id }})|.createdAt")
+          echo $createdAt
+          usedSec=$(( `date +%s` - `date -d "$createdAt" +%s`  ))
+          echo $usedSec
+          convertedTime=$(date -u -d "@$usedSec" +"%Hh %Mm %Ss")
+          echo $convertedTime
+          echo "total_time=$converted_time" >> $GITHUB_ENV
+          echo $total_time
+
       - name: Post to Slack channel
         id: slack
         if: always()
@@ -39,7 +54,7 @@ jobs:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
           payload: |
             {
-              "text": "${{ inputs.username }}, 1 ${{ env.done }}, 2 ${{ env.choice }} 3 ${{ inputs.choice }} 4 ${{ env.check }} 5 ${{env.check}}",
+              "text": "${{ inputs.username }}, 1 ${{ env.done }}, 2 ${{ env.choice }} 3 ${{ inputs.choice }} 4 ${{ env.total_time }} 5 ${{env.check}}",
               "attachments": [
                 {
                   "color": "good",
