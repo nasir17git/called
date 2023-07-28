@@ -3,10 +3,10 @@ name: Reusable Workflow
 on:
   workflow_call:
     inputs:
-      username:
+      APP_NAME:
         required: true
         type: string
-      choice:
+      NEED_MYSQL:
         required: true
         type: boolean
       sentence:
@@ -21,13 +21,13 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: aaaa
-        if: inputs.choice
+        if: inputs.NEED_MYSQL
         run: | 
           echo "done=running!" >> $GITHUB_ENV
 
       - name: bbb
         run: | 
-          echo "choice=${{ inputs.choice }}" >> $GITHUB_ENV
+          echo "choice=${{ inputs.NEED_MYSQL }}" >> $GITHUB_ENV
 
       - name: simple
         run: | 
@@ -57,7 +57,7 @@ jobs:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
           payload: |
             {
-              "text": "${{ inputs.username }}, 1 ${{ env.done }}, 2 ${{ env.choice }} 3 ${{ inputs.choice }} 4 ${{ env.total_time }} 5 ${{env.check}}",
+              "text": "${{ inputs.APP_NAME }}, 1 ${{ env.done }}, 2 ${{ env.choice }} 3 ${{ inputs.choice }} 4 ${{ env.total_time }} 5 ${{env.check}}",
               "attachments": [
                 {
                   "color": "good",
