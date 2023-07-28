@@ -83,9 +83,9 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "1- <${{ github.event.repository.html_url }}/commits/${{ github.sha }}|${{ env.message }}> - ${{ env.github_sha_short }} fff"
+                        "text": "1- '<${{ github.event.repository.html_url }}/commits/${{ github.sha }}|${{ env.message }} - ${{ env.github_sha_short }}>' fff"
                       }
-                    },
+                    }
                   ]
                 }
               ]
