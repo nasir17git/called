@@ -9,9 +9,6 @@ on:
       NEED_MYSQL:
         required: true
         type: boolean
-      sentence:
-        required: true
-        type: string
       
         
 jobs:
