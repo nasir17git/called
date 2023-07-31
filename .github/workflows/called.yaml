@@ -35,6 +35,11 @@ jobs:
           echo "sha_short=${GITHUB_SHA::7}" >> $GITHUB_ENV
           echo "Job id : " ${{ github.job }}
           echo "Run id : " ${{ github.run_id }}
+          echo "container : " ${{ job.container }}
+          echo "container id : " ${{ job.container.id }}
+          echo "service id : " ${{ job.services }}
+          echo "container id : " ${{ job.container.id }}
+          echo "container id : " ${{ job.container.id }}
       - name: aaaa
         if: inputs.NEED_MYSQL
         run: | 
