@@ -77,7 +77,7 @@ jobs:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
           payload: |
             {
-              "text": "${{ inptus.TARGET }}, ${{ job.status }}, ${{ env.job_emoji }}, ${{ inputs.APP_NAME }}, 1 ${{ env.done }}, 2 ${{ env.choice }} 3 ${{ inputs.choice }} 4 ${{ env.total_time }} 5 ${{env.check}}",
+              "text": "${{ inputs.TARGET }}, ${{ job.status }}, ${{ env.job_emoji }}, ${{ inputs.APP_NAME }}, 1 ${{ env.done }}, 2 ${{ env.choice }} 3 ${{ inputs.choice }} 4 ${{ env.total_time }} 5 ${{env.check}}",
               "attachments": [
                 {
                   "color": "#36a64f",
