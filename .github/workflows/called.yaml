@@ -33,6 +33,8 @@ jobs:
       - name: Get Short SHA
         run: |
           echo "sha_short=${GITHUB_SHA::7}" >> $GITHUB_ENV
+          echo "Job id : " ${{ github.job }}
+          echo "Run id : " ${{ github.run_id }}
       - name: aaaa
         if: inputs.NEED_MYSQL
         run: | 
@@ -98,6 +100,13 @@ jobs:
                       "text": {
                         "type": "mrkdwn",
                         "text": "${{ env.result1 }}, ${{ env.result2 }}, <${{ github.event.repository.html_url }}/commits/${{ github.sha }}|${{ env.message }} - ${{ env.sha_short }}>"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "<<${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}/job/|${{ env.message }} - ${{ env.sha_short }}>"
                       }
                     }
                   ]
