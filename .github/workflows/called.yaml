@@ -19,6 +19,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: setup
+        run: |
+          echo "-----"
+          echo "${{ inputs.TARGET }}"
+          echo "-----"
+          if [ ${{ inputs.TARGET }} = false ]; then
+            echo "result1=TARGET is false!!" >> $GITHUB_ENV
+          fi
+          if [ ${{ inputs.TARGET }} -eq 0 ]; then
+          echo "result2=TARGET is 0!!" >> $GITHUB_ENV
+          fi
       - name: Get Short SHA
         run: |
           echo "sha_short=${GITHUB_SHA::7}" >> $GITHUB_ENV
@@ -86,7 +97,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "<${{ github.event.repository.html_url }}/commits/${{ github.sha }}|${{ env.message }} - ${{ env.sha_short }}>"
+                        "text": "${{ env.result1 }}, ${{ env.result2 }}, <${{ github.event.repository.html_url }}/commits/${{ github.sha }}|${{ env.message }} - ${{ env.sha_short }}>"
                       }
                     }
                   ]
