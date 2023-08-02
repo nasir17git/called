@@ -12,6 +12,9 @@ on:
       TARGET:
         required: true
         type: string
+      NOT_ALWAYS:
+        default: aaaa
+        type: string
       
         
 jobs:
@@ -51,7 +54,7 @@ jobs:
 
       - name: simple
         run: | 
-          echo "check=env works" >> $GITHUB_ENV
+          echo "check=env work ${{ inputs.NOT_ALWAYS }}" >> $GITHUB_ENV
 
       - name: slack_message_for_master_fail
         id: pre_slack
