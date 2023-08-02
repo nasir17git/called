@@ -41,7 +41,7 @@ jobs:
           echo "container id : " ${{ job.container.id }}
           echo "container id : " ${{ job.container.id }}
       - name: aaaa
-        if: ${{ inputs.SKIP_TEST != true }}
+        if: ${{ inputs.SKIP_TEST == false }}
         run: | 
           echo "done=running!" >> $GITHUB_ENV
 
