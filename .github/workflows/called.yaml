@@ -100,6 +100,7 @@ jobs:
 
       - name: Post to Slack channel
         id: slack
+        if: ${{ inputs.NEED_MYSQL != true }}
         uses: slackapi/slack-github-action@v1.24.0
         with:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
