@@ -58,15 +58,17 @@ jobs:
 
       - name: ziptest
         run: | 
-          mkdir -p tmp_for_upload
+          mkdir -p tmp_for_upload/TEMP
           ls -alh
-          echo "cp -r * tmp_for_upload/"
-          cp -r * tmp_for_upload/
-          echo "deploy/* tmp_for_upload/"
+          echo "cp -r * tmp_for_upload/TEMP"
+          cp -r * tmp_for_upload/TEMP
+          echo "deploy/* tmp_for_upload/TEMP"
+          cp deploy/* tmp_for_upload/TEMP
           mkdir -p upload
-          echo "cd tmp_for_upload && zip -r ../upload/${zip_filename} * && cd .."
+          echo "cd tmp_for_upload/TEMP && zip -r ../../upload/zip_name * && cd ../.."
+          cd tmp_for_upload/TEMP && zip -r ../../upload/zip_name * && cd ../..
           ls -alh
-          cd tmp_for_upload && zip -r ../upload/edededd * && cd ..
+          ls -alh ./upload
 
       - name: slack_message_for_master_fail
         id: pre_slack
