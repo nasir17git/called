@@ -107,7 +107,7 @@ jobs:
 
       - name: Post to Slack channel
         id: slack
-        if: always()
+        if: ${{ inputs.NEED_MYSQL == false }}
         uses: slackapi/slack-github-action@v1.24.0
         with:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
@@ -118,6 +118,13 @@ jobs:
                 {
                   "color": "#36a64f",
                   "blocks": [
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "trigger value is ${{ inputs.NEED_MYSQL == false }}"
+                      }
+                    },
                     {
                       "type": "section",
                       "text": {
