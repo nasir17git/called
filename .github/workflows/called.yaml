@@ -42,9 +42,8 @@ jobs:
       - name: aaaa
         run: | 
           echo "done=${{ inputs.NEED_MYSQL != true }}" >> $GITHUB_ENV
-          if [[ -n ${{ inputs.FIRE }} ]] ; then
+          if [ "${{ inputs.FIRE }}" ]; then
             echo "done=values detected" >> $GITHUB_ENV
-          fi
 
       - name: bbb
         run: | 
