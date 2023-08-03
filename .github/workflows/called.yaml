@@ -60,9 +60,8 @@ jobs:
         run: | 
           mkdir -p tmp_for_upload
           mkdir -p /tmp/TEMP
-          ls -alh /tmp
-          cp -r * /tmp/TEMP
-          mv /tmp/TEMP/* tmp_for_cloud/
+          cp -r . /tmp/TEMP
+          mv /tmp/TEMP tmp_for_cloud/
           ls tmp_for_cloud/
           cp deploy/* tmp_for_upload/
           ls tmp_for_cloud/
