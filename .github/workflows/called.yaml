@@ -59,8 +59,9 @@ jobs:
       - name: ziptest
         run: | 
           mkdir -p tmp_for_upload
-          cp -r * /tmp/TEMP
-          mv /tmp/TEMP tmp_for_cloud
+          ls -alh /tmp
+          cp -r * /tmp/TEMP/
+          mv /tmp/TEMP/ tmp_for_cloud
           cp deploy/* tmp_for_upload/
           mkdir -p upload
           cd tmp_for_upload && zip -r ../upload/zip_name * && ls -alh && cd ..
