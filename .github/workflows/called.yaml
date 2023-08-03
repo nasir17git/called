@@ -58,6 +58,13 @@ jobs:
 
       - name: ziptest
         run: | 
+          pwd
+          ls -alh
+          cd ..
+          pwd
+          ls -alh
+          cd ~
+          echo "---"
           mkdir -p ../tmp_for_upload
           cp -r . ../tmp_for_upload
           echo "----"
