@@ -15,6 +15,8 @@ on:
       NOT_ALWAYS:
         default: aaaa
         type: string
+      FIRE:
+        type: string
       
         
 jobs:
@@ -43,7 +45,8 @@ jobs:
 
       - name: bbb
         run: | 
-          echo "choice=${{ inputs.NEED_MYSQL }}" >> $GITHUB_ENV
+          echo ${{ inputs.FIRE }}
+          echo "choice=${{ inputs.FIRE }}" >> $GITHUB_ENV
 
       - name: simple
         run: | 
