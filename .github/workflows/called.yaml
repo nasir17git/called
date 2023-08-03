@@ -60,7 +60,7 @@ jobs:
         run: | 
           mkdir -p tmp_for_upload
           ls -alh
-          echo "cp -r * tmp_for_upload"
+          echo "cp -r * tmp_for_upload/"
           cp -r * tmp_for_upload/
           echo "deploy/* tmp_for_upload/"
           mkdir -p upload
