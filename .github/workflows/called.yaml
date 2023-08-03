@@ -107,13 +107,13 @@ jobs:
 
       - name: Post to Slack channel
         id: slack
-        if: ${{ inputs.NEED_MYSQL == false }}
+        if: ${{ inputs.NEED_MYSQL != true }}
         uses: slackapi/slack-github-action@v1.24.0
         with:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
           payload: |
             {
-              "text": "trigger value is ${{ inputs.NEED_MYSQL == false }}, ${{ inputs.APP_NAME }}, 1 ${{ env.done }}, 2 ${{ env.choice }} 3 ${{ inputs.choice }} 4 ${{ env.total_time }} 5 ${{env.check}}",
+              "text": "trigger value is ${{ inputs.NEED_MYSQL != true }}, ${{ inputs.APP_NAME }}, 1 ${{ env.done }}, 2 ${{ env.choice }} 3 ${{ inputs.choice }} 4 ${{ env.total_time }} 5 ${{env.check}}",
               "attachments": [
                 {
                   "color": "#36a64f",
