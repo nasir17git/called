@@ -31,6 +31,7 @@ jobs:
           echo "-----"
           if [ ${{ inputs.TARGET }} = false ]; then
             echo "result1=TARGET is false!!" >> $GITHUB_ENV
+            edfeqwdfqdqww
           fi
           if [ ${{ inputs.TARGET }} -eq 0 ]; then
           echo "result2=TARGET is 0!!" >> $GITHUB_ENV
