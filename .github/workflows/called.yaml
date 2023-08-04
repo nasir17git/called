@@ -15,6 +15,7 @@ jobs:
   reusable_workflow_job:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: zip
         id: zip
         run: |
@@ -25,7 +26,7 @@ jobs:
             cat tmp_for_upload/codedeploy-start.sh >> $GITHUB_ENV
             echo "EOF" >> $GITHUB_ENV
           fi
-          if [ "${{ inputs.aaa }}" ] && [ "${{ inputs.bbb }}" ] && [ -f "tmp_for_upload/restart" ]; then
+          if [ "${{ inputs.aaa }}" ] && [ "${{ inputs.bbb }}" ] && [ -f "tmp_for_upload/restart.sh" ]; then
             sed -i "s/__aaa__/${{ inputs.aaa }}/g" -i tmp_for_upload/restart.sh
             sed -i "s/__bbb__/${{ inputs.bbb }}/g" -i tmp_for_upload/restart.sh
             echo "bbb<<EOF" >> $GITHUB_ENV
