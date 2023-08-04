@@ -19,9 +19,13 @@ jobs:
       - name: zip
         id: zip
         run: |
+          pwd
+          ls -alh
+          echo "---"
           cp deploy/* tmp_for_upload/
           if [ "${{ inputs.aaa }}" ] && [ -f "tmp_for_upload/codedeploy-start.sh" ]; then
             sed -i "s/__aaa__/${{ inputs.aaa }}/g" -i tmp_for_upload/codedeploy-start.sh
+            cat tmp_for_upload/codedeploy-start.sh
             echo "aaa<<EOF" >> $GITHUB_ENV
             cat tmp_for_upload/codedeploy-start.sh >> $GITHUB_ENV
             echo "EOF" >> $GITHUB_ENV
@@ -29,6 +33,7 @@ jobs:
           if [ "${{ inputs.aaa }}" ] && [ "${{ inputs.bbb }}" ] && [ -f "tmp_for_upload/restart.sh" ]; then
             sed -i "s/__aaa__/${{ inputs.aaa }}/g" -i tmp_for_upload/restart.sh
             sed -i "s/__bbb__/${{ inputs.bbb }}/g" -i tmp_for_upload/restart.sh
+            cat tmp_for_upload/restart.sh
             echo "bbb<<EOF" >> $GITHUB_ENV
             cat tmp_for_upload/restart.sh >> $GITHUB_ENV
             echo "EOF" >> $GITHUB_ENV
