@@ -25,7 +25,6 @@ jobs:
           cp deploy/* tmp_for_upload/
           if [ "${{ inputs.aaa }}" ] && [ -f "tmp_for_upload/codedeploy-start.sh" ]; then
             sed -i "s/__aaa__/${{ inputs.aaa }}/g" -i tmp_for_upload/codedeploy-start.sh
-            cat tmp_for_upload/codedeploy-start.sh
             # EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
             # echo "aaa<<$EOF" >> $GITHUB_ENV
             # cat tmp_for_upload/codedeploy-start.sh >> $GITHUB_ENV
@@ -40,6 +39,9 @@ jobs:
             # cat tmp_for_upload/restart.sh >> $GITHUB_ENV
             # echo "$EOF2" >> $GITHUB_ENV
           fi
+          cat tmp_for_upload/codedeploy-start.sh
+          echo "---"
+          cat tmp_for_upload/restart.sh
 
       - name: Post to Slack channel
         id: slack
