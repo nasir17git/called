@@ -3,19 +3,11 @@ name: Reusable Workflow
 on:
   workflow_call:
     inputs:
-      APP_NAME:
+      aaa:
         required: true
         type: string
-      NEED_MYSQL:
+      bbb:
         required: true
-        type: boolean
-      TARGET:
-        required: true
-        type: string
-      NOT_ALWAYS:
-        default: aaaa
-        type: string
-      FIRE:
         type: string
       
         
@@ -23,97 +15,32 @@ jobs:
   reusable_workflow_job:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: setup
+      - name: zip
+        id: zip
         run: |
-          echo "-----"
-          echo "${{ inputs.TARGET }}"
-          echo "-----"
-          if [ ${{ inputs.TARGET }} = false ]; then
-            echo "result1=TARGET is false!!" >> $GITHUB_ENV
-            sed -i "s/__ACTIVE_PROFILE__/dddd/g" -i wrong/path.sh
-          fi
-          if [ ${{ inputs.TARGET }} -eq 0 ]; then
-          echo "result2=TARGET is 0!!" >> $GITHUB_ENV
-          fi
-      - name: Get Short SHA
-        run: |
-          echo "sha_short=${GITHUB_SHA::7}" >> $GITHUB_ENV
-
-      - name: aaaa
-        run: | 
-          echo "done=${{ inputs.NEED_MYSQL != true }}" >> $GITHUB_ENV
-          if [ "${{ inputs.FIRE }}" ]; then
-            echo "done=values detected" >> $GITHUB_ENV
-          fi
-
-      - name: bbb
-        run: | 
-          echo ${{ inputs.FIRE }}
-          echo "choice=${{ inputs.FIRE }}" >> $GITHUB_ENV
-
-      - name: simple
-        run: | 
-          echo "check=env work ${{ inputs.NOT_ALWAYS }}" >> $GITHUB_ENV
-
-      - name: ziptest
-        run: | 
-          mkdir -p /tmp/TEMP
-          cp -r . /tmp/TEMP
-          echo "----"
-          mkdir -p tmp_for_upload
-          mv /tmp/TEMP/* tmp_for_upload
-          echo "----"
-          ls -alh tmp_for_upload/
           cp deploy/* tmp_for_upload/
-          echo "----"
-          ls -alh tmp_for_upload/
-          mkdir -p upload
-          cd tmp_for_upload && zip -r ../upload/zip_name * && ls -alh && cd ..
-
-      - name: slack_message_for_master_fail
-        id: pre_slack
-        if: always()
-        run: |
-          if [[ "${{ job.status }}" == "success" ]]; then
-            echo "color=#36a64f" >> $GITHUB_ENV
-            echo "job_emoji=:white_check_mark:" >> $GITHUB_ENV
-          else
-            echo "color=#a63636" >> $GITHUB_ENV
-            echo "job_emoji=:x:" >> $GITHUB_ENV
+          if [ "${{ inputs.aaa }}" ] && [ -f "tmp_for_upload/codedeploy-start.sh" ]; then
+            sed -i "s/__aaa__/${{ inputs.aaa }}/g" -i tmp_for_upload/codedeploy-start.sh
+            echo "aaa<<EOF" >> $GITHUB_ENV
+            cat tmp_for_upload/codedeploy-start.sh >> $GITHUB_ENV
+            echo "EOF" >> $GITHUB_ENV
           fi
-
-
-      - name: total_time
-        id: total_time
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          sleep 2
-          message=$(git --no-pager log --pretty=format:'%s' -n 1)
-          echo "message=$message" >> $GITHUB_ENV
-          createdAt=$(gh run list --json databaseId,createdAt --jq ".[]|select(.databaseId==${{ github.run_id }})|.createdAt")
-          echo $createdAt
-          usedSec=$(( `date +%s` - `date -d "$createdAt" +%s`  ))
-          echo $usedSec
-          convertedTime=$(date -u -d "@$usedSec" +"%Hh %Mm %Ss")
-          echo $convertedTime
-          echo "total_time=$convertedTime" >> $GITHUB_ENV
-          echo $total_time
-          echo ${{ env.total_time }}
-          env
-          echo "----------"
-          echo $GITHUB_ENV
+          if [ "${{ inputs.aaa }}" ] && [ "${{ inputs.bbb }}" ] && [ -f "tmp_for_upload/restart" ]; then
+            sed -i "s/__aaa__/${{ inputs.aaa }}/g" -i tmp_for_upload/restart.sh
+            sed -i "s/__bbb__/${{ inputs.bbb }}/g" -i tmp_for_upload/restart.sh
+            echo "bbb<<EOF" >> $GITHUB_ENV
+            cat tmp_for_upload/restart.sh >> $GITHUB_ENV
+            echo "EOF" >> $GITHUB_ENV
+          fi
 
       - name: Post to Slack channel
         id: slack
-        if: ${{ inputs.NEED_MYSQL != true }}
         uses: slackapi/slack-github-action@v1.24.0
         with:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
           payload: |
             {
-              "text": "trigger value is ${{ inputs.NEED_MYSQL != true }},1 ${{ env.done }}, 2 ${{ env.choice }} 3 ${{ inputs.choice }} 4 ${{ env.total_time }} 5 ${{env.check}}",
+              "text": "1. ${{ env.aaa }} \n 2. ${{ env.bbb }}",
               "attachments": [
                 {
                   "color": "#36a64f",
@@ -122,21 +49,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "trigger value is ${{ inputs.NEED_MYSQL == false }}"
-                      }
-                    },
-                    {
-                      "type": "section",
-                      "text": {
-                        "type": "mrkdwn",
-                        "text": "${{ env.result1 }}, ${{ env.result2 }}, <${{ github.event.repository.html_url }}/commits/${{ github.sha }}|${{ env.message }} - ${{ env.sha_short }}>"
-                      }
-                    },
-                    {
-                      "type": "section",
-                      "text": {
-                        "type": "mrkdwn",
-                        "text": "<<${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}/job/|${{ env.message }} - ${{ env.sha_short }}>"
+                        "text": "aaa"
                       }
                     }
                   ]
