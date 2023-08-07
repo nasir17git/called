@@ -90,59 +90,9 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
         with:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
-name: Reusable Workflow
-
-on:
-  workflow_call:
-    inputs:
-      aaa:
-        required: true
-        type: string
-      bbb:
-        required: true
-        type: string
-      
-        
-jobs:
-  reusable_workflow_job:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: zip
-        id: zip
-        run: |
-          pwd
-          ls -alh
-          echo "---"
-          cp deploy/* tmp_for_upload/
-          if [ "${{ inputs.aaa }}" ] && [ -f "tmp_for_upload/codedeploy-start.sh" ]; then
-            sed -i "s/__aaa__/${{ inputs.aaa }}/g" -i tmp_for_upload/codedeploy-start.sh
-            # EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
-            # echo "aaa<<$EOF" >> $GITHUB_ENV
-            # cat tmp_for_upload/codedeploy-start.sh >> $GITHUB_ENV
-            # echo "$EOF" >> $GITHUB_ENV
-          fi
-          if [ "${{ inputs.aaa }}" ] && [ "${{ inputs.bbb }}" ] && [ -f "tmp_for_upload/restart.sh" ]; then
-            sed -i "s/__aaa__/${{ inputs.aaa }}/g" -i tmp_for_upload/restart.sh
-            sed -i "s/__bbb__/${{ inputs.bbb }}/g" -i tmp_for_upload/restart.sh
-            cat tmp_for_upload/restart.sh
-            # EOF2=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
-            # echo "bbb<<$EOF2" >> $GITHUB_ENV
-            # cat tmp_for_upload/restart.sh >> $GITHUB_ENV
-            # echo "$EOF2" >> $GITHUB_ENV
-          fi
-          cat tmp_for_upload/codedeploy-start.sh
-          echo "---"
-          cat tmp_for_upload/restart.sh
-
-      - name: Post to Slack channel
-        id: slack
-        uses: slackapi/slack-github-action@v1.24.0
-        with:
-          channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
           payload: |
             {
-              "text": "1. ${{ env.aaa }} \n 2. ${{ env.bbb }}",
+              "text": "1. ${{ env.aaa }}  2. ${{ env.bbb }}  3alid",
               "attachments": [
                 {
                   "color": "#36a64f",
@@ -151,7 +101,15 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "aaa"
+                        "text": "aaa 
+                        bbb "
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": " bbb  ccc"
                       }
                     }
                   ]
