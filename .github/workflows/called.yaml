@@ -111,7 +111,7 @@ jobs:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
           payload: |
             {
-              "text": "v1",
+              "text": "v2",
               "attachments": [
                 {
                   "color": "#36a64f",
