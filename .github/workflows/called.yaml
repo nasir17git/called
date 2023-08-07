@@ -52,21 +52,7 @@ jobs:
           cat gradle_build.log | grep -E -B 3 -A 3 '^e:' >> $GITHUB_ENV
           echo "$EOF" >> $GITHUB_ENV
   
-      # - name: msg1
-      #   run: |
-      #     if [[ "true" == 'true' ]]; then
-      #       if [[ "true" == 'true' ]]; then
-      #         EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
-      #         echo "failed_slack_message<<$EOF" >> $GITHUB_ENV
-      #         echo " gradle f ❌ failed msg" >> $GITHUB_ENV
-      #         echo "```" >> $GITHUB_ENV
-      #         echo "${{ env.failed_detail }}" >> $GITHUB_ENV
-      #         echo "```" >> $GITHUB_ENV
-      #         echo "$EOF" >> $GITHUB_ENV
-      #       fi
-      #     fi
-
-      - name: msg2
+      - name: msg1
         run: |
           if [[ "true" == 'true' ]]; then
             if [[ "true" == 'true' ]]; then
@@ -74,16 +60,30 @@ jobs:
               echo "failed_slack_message<<$EOF" >> $GITHUB_ENV
               echo " gradle f ❌ failed msg" >> $GITHUB_ENV
               echo "```" >> $GITHUB_ENV
-              echo "> Task :aaa:bbb
-  
-              > Task :aaa FAILED
-              e: file:///home/runner/work/path.kt:20:36 error msg: sample
-              e: file:///home/runner/work/path.kt:52:28 error msg: sample
-              w: Detected aaa at path/to/err" >> $GITHUB_ENV
+              echo "${{ toJSON(env.failed_detail) }}" >> $GITHUB_ENV
               echo "```" >> $GITHUB_ENV
               echo "$EOF" >> $GITHUB_ENV
             fi
           fi
+
+      # - name: msg2
+      #   run: |
+      #     if [[ "true" == 'true' ]]; then
+      #       if [[ "true" == 'true' ]]; then
+      #         EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+      #         echo "failed_slack_message<<$EOF" >> $GITHUB_ENV
+      #         echo " gradle f ❌ failed msg" >> $GITHUB_ENV
+      #         echo "```" >> $GITHUB_ENV
+      #         echo "> Task :aaa:bbb
+  
+      #         > Task :aaa FAILED
+      #         e: file:///home/runner/work/path.kt:20:36 error msg: sample
+      #         e: file:///home/runner/work/path.kt:52:28 error msg: sample
+      #         w: Detected aaa at path/to/err" >> $GITHUB_ENV
+      #         echo "```" >> $GITHUB_ENV
+      #         echo "$EOF" >> $GITHUB_ENV
+      #       fi
+      #     fi
 
 
       - name: Post to Slack channel
@@ -93,7 +93,7 @@ jobs:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
           payload: |
             {
-              "text": "1. ${{ env.aaa }} \n 2. ${{ env.bbb }} \n 3. ${{ env.failed_detail }},""
+              "text": "1. ${{ env.aaa }} \n 2. ${{ env.bbb }} \n 3. ${{ env.failed_slack_message }},""
               "attachments": [
                 {
                   "color": "#36a64f",
@@ -102,14 +102,14 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "aaa bbb  "
+                        "text": "aaa bbb ${{ env.failed_slack_message }} "
                       }
                     },
                     {
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": " bbb \n ccc"
+                        "text": " bbb \n ccc ${{ env.failed_slack_message }} "
                       }
                     },
                   ]
