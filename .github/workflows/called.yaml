@@ -58,7 +58,7 @@ jobs:
             if [[ "true" == 'true' ]]; then
               EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
               echo "failed_slack_message<<$EOF" >> $GITHUB_ENV
-              echo "\n gradle f ❌ failed msg" >> $GITHUB_ENV
+              echo " gradle f ❌ failed msg" >> $GITHUB_ENV
               echo "```" >> $GITHUB_ENV
               echo "${{ env.failed_detail }}" >> $GITHUB_ENV
               echo "```" >> $GITHUB_ENV
@@ -82,14 +82,14 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "aaa \n bbb  ${{ env.failed_slack_message }} "
+                        "text": "aaa bbb  ${{ env.failed_slack_message }} "
                       }
                     },
                     {
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "bbb  ${{ env.failed_slack_message }} "
+                        "text": " bbb  ${{ env.failed_slack_message }} "
                       }
                     },
                   ]
