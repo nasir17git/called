@@ -99,7 +99,10 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "aaa bbb "
+                        "text": "aaa 
+bbb 
+dddd
+"
                       }
                     },
                     {
