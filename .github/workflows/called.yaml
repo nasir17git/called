@@ -60,7 +60,7 @@ jobs:
               echo "failed_slack_message<<$EOF" >> $GITHUB_ENV
               echo " gradle f ❌ failed msg" >> $GITHUB_ENV
               echo "```" >> $GITHUB_ENV
-              echo "${{ toJSON(env.failed_detail) }}" >> $GITHUB_ENV
+              echo ${{ toJSON(env.failed_detail) }} >> $GITHUB_ENV
               echo "```" >> $GITHUB_ENV
               echo "$EOF" >> $GITHUB_ENV
             fi
