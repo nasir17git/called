@@ -83,24 +83,24 @@ jobs:
       #       fi
       #     fi
 
-      - name: msg3
-        run: |
-          if [[ "true" == 'true' ]]; then
-            if [[ "true" == 'true' ]]; then
-              EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
-              echo "failed_slack_message<<$EOF" >> $GITHUB_ENV
-              echo " gradle f ❌ failed msg" >> $GITHUB_ENV
-              echo "```" >> $GITHUB_ENV
-              echo ${{ toJSON(env.failed_detail)}} >> $GITHUB_ENV
-              echo "```" >> $GITHUB_ENV
-              echo "$EOF" >> $GITHUB_ENV
-            fi
-          fi
+      # - name: msg3
+      #   run: |
+      #     if [[ "true" == 'true' ]]; then
+      #       if [[ "true" == 'true' ]]; then
+      #         EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+      #         echo "failed_slack_message<<$EOF" >> $GITHUB_ENV
+      #         echo " gradle f ❌ failed msg" >> $GITHUB_ENV
+      #         echo "```" >> $GITHUB_ENV
+      #         echo ${{ toJSON(env.failed_detail)}} >> $GITHUB_ENV
+      #         echo "```" >> $GITHUB_ENV
+      #         echo "$EOF" >> $GITHUB_ENV
+      #       fi
+      #     fi
 
-      - name: check
-        run: |
-          echo ${{ env.failed_slack_message }}
-          echo ${{ toJSON(env.failed_slack_message) }}
+      # - name: check
+      #   run: |
+      #     echo ${{ env.failed_slack_message }}
+      #     echo ${{ toJSON(env.failed_slack_message) }}
 
       - name: Post to Slack channel
         id: slack
@@ -111,7 +111,7 @@ jobs:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
           payload: |
             {
-              "text": "1. ${{ env.aaa }} \n 2. ${{ env.bbb }} \n 3alid, ${{ toJSON(env.failed_slack_message) }}",
+              "text": "1. ${{ env.aaa }} \n 2. ${{ env.bbb }} \n 3alid, ",
               "attachments": [
                 {
                   "color": "#36a64f",
