@@ -100,9 +100,7 @@ jobs:
                       "text": {
                         "type": "mrkdwn",
                         "text": "aaa 
-bbb 
-dddd
-"
+                        bbb "
                       }
                     },
                     {
@@ -111,7 +109,7 @@ dddd
                         "type": "mrkdwn",
                         "text": " bbb \n ccc"
                       }
-                    },
+                    }
                   ]
                 }
               ]
