@@ -53,7 +53,7 @@ jobs:
           echo "$EOF" >> $GITHUB_ENV
   
       - name: msg
-        run: |
+        run: >
           if [[ "true" == 'true' ]]; then
             if [[ "true" == 'true' ]]; then
               EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
@@ -71,7 +71,7 @@ jobs:
         uses: slackapi/slack-github-action@v1.24.0
         with:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
-          payload: |
+          payload: >
             {
               "text": "1. ${{ env.aaa }} \n 2. ${{ env.bbb }} \n 3. ${{ env.failed_slack_message }},""
               "attachments": [
