@@ -47,7 +47,7 @@ jobs:
       - name: failed_detail
         run: |
           EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
-          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          jq
           echo "failed_detail<<$EOF" >> $GITHUB_ENV
           cat gradle_build.log | grep -E -B 3 -A 3 '^e:' | jq -s -c >> $GITHUB_ENV
           echo "$EOF" >> $GITHUB_ENV
