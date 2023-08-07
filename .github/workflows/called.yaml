@@ -44,9 +44,12 @@ jobs:
       #     cat tmp_for_upload/restart.sh
       #     jq --version
 
-      # - name: failed_detail
-      #   run: |
-      #     cat gradle_build.log | grep -E -B 3 -A 3 '^e:' >> failed.log
+      - name: failed_detail
+        run: |
+            EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+            echo "failed_detail<<$EOF" >> $GITHUB_ENV
+            cat gradle_build.log | grep -E -m 1 -B 3 -A 3 '^e:' >> $GITHUB_ENV
+            echo "$EOF" >> $GITHUB_ENV      
       # - name: msg1
       #   run: |
       #     if [[ "true" == 'true' ]]; then
@@ -88,7 +91,7 @@ jobs:
               echo "failed_slack_message<<$EOF" >> $GITHUB_ENV
               echo " gradle f ❌ failed msg" >> $GITHUB_ENV
               echo "```" >> $GITHUB_ENV
-              cat gradle_build.log | grep -E -B 3 -A 3 '^e:' >> $GITHUB_ENV
+              echo ${{ toJSON(env.failed_detail)}} >> $GITHUB_ENV
               echo "```" >> $GITHUB_ENV
               echo "$EOF" >> $GITHUB_ENV
             fi
