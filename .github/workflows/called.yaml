@@ -93,7 +93,7 @@ jobs:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
           payload: |
             {
-              "text": "1. ${{ env.aaa }} \n 2. ${{ env.bbb }} \n 3. ${{ env.failed_slack_message }},""
+              "text": "1. ${{ env.aaa }} \n 2. ${{ env.bbb }} \n 3. ${{ env.failed_detail }},""
               "attachments": [
                 {
                   "color": "#36a64f",
@@ -102,14 +102,14 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "aaa bbb  ${{ env.failed_slack_message }} "
+                        "text": "aaa bbb  ${{ env.failed_detail }} "
                       }
                     },
                     {
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": " bbb  ${{ env.failed_slack_message }} "
+                        "text": " bbb \n ${{ env.failed_detail }} "
                       }
                     },
                   ]
