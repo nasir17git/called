@@ -28,7 +28,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "aaa \n bbb "
+                        "text": " ${{ github.event.head_commit.message }}, ${{ github.ref_name }} "
                       }
                     },
                     {
