@@ -1,0 +1,44 @@
+name: prtest
+
+on:
+  workflow_call:
+      
+        
+jobs:
+  reusable_workflow_job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Post to Slack channel
+        id: slack
+        uses: slackapi/slack-github-action@v1.24.0
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        with:
+          channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
+          payload: |
+            {
+              "text": "prtest running",
+              "attachments": [
+                {
+                  "color": "#36a64f",
+                  "blocks": [
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "aaa \n bbb "
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "bbb \n ccc"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
