@@ -35,7 +35,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "bbb \n ccc"
+                        "text": "github.base_ref: ${{github.base_ref}} \n github.head_ref: ${{github.head_ref}} \n github.ref: ${{github.ref}}"
                       }
                     }
                   ]
