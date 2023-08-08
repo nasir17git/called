@@ -10,6 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: env
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - name: Post to Slack channel
         id: slack
         uses: slackapi/slack-github-action@v1.24.0
@@ -28,7 +32,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": " ${{ github.event.head_commit.message }}, ${{ github.ref_name }} "
+                        "text": " ${{ github.event.pull_request.title }}, ${{ github.ref_name }} "
                       }
                     },
                     {
