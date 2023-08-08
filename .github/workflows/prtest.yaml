@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
+      - run: env
       - name: Post to Slack channel
         id: slack
         uses: slackapi/slack-github-action@v1.24.0
