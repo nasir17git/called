@@ -34,4 +34,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: check
-        run: echo ${{ jobs.validation.outputs.in_progress_check }}
+        run: echo ${{ needs.validation.outputs.in_progress_check }}
