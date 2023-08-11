@@ -7,11 +7,16 @@ on:
       - main
   pull_request:
   workflow_call:
-        
+    outputs:
+      in_progress_check:
+        value: ${{ jobs.validation.outputs.in_progress_check }}
 jobs:
-  reusable_workflow_job:
+  validation:
     runs-on: ubuntu-latest
+    # outputs:
+    #   in_progress_check: ${{ jobs.validation.outputs.in_progress_check }}
     steps:
       - name: validation
         run: |
-          gh run list --workflow ${{github.workflow}} --json status -q '.[].status' | grep in_progress | wc -l
+          in_progress_check=$(gh run list --workflow ${{github.workflow}} --json status -q '.[].status' | grep in_progress | wc -l)
+          echo "in_progress_check=${in_progress_check}" >> $GITHUB_OUTPUT
