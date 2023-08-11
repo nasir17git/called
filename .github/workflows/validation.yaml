@@ -13,8 +13,8 @@ on:
 jobs:
   validation:
     runs-on: ubuntu-latest
-    # outputs:
-    #   in_progress_check: ${{ jobs.validation.outputs.in_progress_check }}
+    outputs:
+      in_progress_check: ${{ steps.validation.outputs.in_progress_check }}
     steps:
       - uses: actions/checkout@v3
       - name: validation
