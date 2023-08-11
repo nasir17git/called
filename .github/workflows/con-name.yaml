@@ -20,9 +20,12 @@ jobs:
       - name: check_inprogress
         run: |
           echo ${{ needs.validation.outputs.in_progress_check }}
-      - name: sleep
+      - name: Dump GitHub context1
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
-          sleep 40
+          echo "$GITHUB_CONTEXT"
+          echo ${{env.GITHUB_ACTOR}}
       - name: Post to Slack channel
         id: slack
         uses: slackapi/slack-github-action@v1.24.0
