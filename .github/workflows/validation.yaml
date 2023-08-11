@@ -30,3 +30,8 @@ jobs:
       - name: echo
         run: |
           echo ${{ steps.validation.outputs.in_progress_check }}
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check
+        run: echo ${{ jobs.validation.outputs.in_progress_check }}
