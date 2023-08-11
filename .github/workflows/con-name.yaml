@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: check_inprogress
         run: |
-          echo ${{ needs.validation.outputs.in_progess_check }}
+          echo ${{ needs.validation.outputs.in_progress_check }}
       - name: sleep
         run: |
           sleep 40

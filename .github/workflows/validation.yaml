@@ -25,14 +25,14 @@ jobs:
           in_progress_check=$(gh run list --workflow ${{github.workflow}} --json status -q '.[].status' | grep in_progress | wc -l)
           echo "in_progress_check=${in_progress_check}" >> $GITHUB_OUTPUT
           echo $in_progress_check
-      - name: wait
-        run: sleep 15
-      - name: echo
-        run: |
-          echo ${{ steps.validation.outputs.in_progress_check }}
-  check:
-    runs-on: ubuntu-latest
-    needs: validation
-    steps:
-      - name: check
-        run: echo ${{ needs.validation.outputs.in_progress_check }}
+      # - name: wait
+      #   run: sleep 15
+      # - name: echo
+      #   run: |
+      #     echo ${{ steps.validation.outputs.in_progress_check }}
+  # check:
+  #   runs-on: ubuntu-latest
+  #   needs: validation
+  #   steps:
+  #     - name: check
+  #       run: echo ${{ needs.validation.outputs.in_progress_check }}
