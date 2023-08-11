@@ -1,0 +1,17 @@
+name: validation
+run-name: validation - ${{github.workflow}}
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_call:
+        
+jobs:
+  reusable_workflow_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: validation
+        run: |
+          gh run list --workflow ${{github.workflow}} --json status -q '.[].status' | grep in_progress | wc -l
