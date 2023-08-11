@@ -17,6 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: check_inprogress
+        run: |
+          echo ${{ needs.validation.outputs.in_progess_check }}
       - name: sleep
         run: |
           sleep 40
