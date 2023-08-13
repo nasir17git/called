@@ -24,17 +24,11 @@ jobs:
           ggl=google
           echo "ggl=google" >> $GITHUB_ENV
           echo "url1=https://www.$ggl.com" >> $GITHUB_ENV
-          # echo "failed_slack_message=\n<https://ap-northeast-2.console.aws.amazon.com/codesuite/codedeploy/deployments/${deployment_id}?region=ap-northeast-2|${deployment_id}>" >> $GITHUB_ENV
 
       - name: in_other_job
         run: |
           echo "url2=https://www.$(ggl).com" >> $GITHUB_ENV
           echo "url3=${{ format('https://www.{0}.com', env.ggl)}}"
-          # run: |
-          #   echo "USERNAME=${{secrets.${{github.event.inputs.infraEnv}}_username}}" >> $GITHUB_ENV
-          #   ${{ secrets[format('{0}_username', github.event.inputs.infraEnv)] }}
-
-          # key: ${{ format('{0}-conda-stage-{1}-{2}', runner.os, matrix.stack, hashFiles(format('env/{0}_environment.yml', matrix.stack))) }}
 
       - name: check
         run: |
