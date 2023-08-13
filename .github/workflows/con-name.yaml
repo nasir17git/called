@@ -29,7 +29,7 @@ jobs:
       - name: in_other_job
         run: |
           echo "url2=https://www.$(ggl).com" >> $GITHUB_ENV
-          echo "url3=https://www."
+          echo "url3=${{ format('https://www.{0}.com', env.ggl)}}"
           # run: |
           #   echo "USERNAME=${{secrets.${{github.event.inputs.infraEnv}}_username}}" >> $GITHUB_ENV
           #   ${{ secrets[format('{0}_username', github.event.inputs.infraEnv)] }}
@@ -40,7 +40,7 @@ jobs:
         run: |
           echo ${{env.url1}}
           echo ${{env.url2}}
-
+          echo ${{env.url3}}
       - name: Post to Slack channel
         id: slack
         uses: slackapi/slack-github-action@v1.24.0
