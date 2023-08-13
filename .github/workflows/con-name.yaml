@@ -2,7 +2,7 @@ name: Reusable Workflow
 run-name: aaa
 
 concurrency:
-  group: ${{ github.head_ref || github.run_id }}
+  group: "aaaa"
   cancel-in-progress: false
 
 on:
