@@ -3,13 +3,9 @@ run-name: aaa
 
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
-  # cancel-in-progress: true
+  cancel-in-progress: false
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
   workflow_call:
         
 jobs:
@@ -17,15 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: check_inprogress
-        run: |
-          echo ${{ needs.validation.outputs.in_progress_check }}
-      - name: Dump GitHub context1
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: |
-          echo "$GITHUB_CONTEXT"
-          echo ${{env.GITHUB_ACTOR}}
+      - run: sleep 30
       - name: Post to Slack channel
         id: slack
         uses: slackapi/slack-github-action@v1.24.0
