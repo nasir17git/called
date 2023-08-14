@@ -43,7 +43,7 @@ jobs:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
           payload: |
             {
-              "text": "aa <${{url2}}|url2> , <${{url3}}|url3>",
+              "text": "aa <${{env.url2}}|url2> , <${{env.url3}}|url3>",
               "attachments": [
                 {
                   "color": "#36a64f",
