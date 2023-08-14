@@ -72,7 +72,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "'<${{ github.event.repository.html_url }}/commits/${{ github.sha }}|${{ env.message }}>', ${{ env.sha_short }} by  ${{ github.actor }} in ${{ env.total_time }}."
+                        "text": "'<${{ github.event.repository.html_url }}/commits/${{ github.sha }}|msg>', ${{ env.sha_short }} by  ${{ github.actor }} in 03m 02s."
                       }
                     }
                   ]
