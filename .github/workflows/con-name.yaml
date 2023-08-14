@@ -27,14 +27,15 @@ jobs:
       - name: make_msg
         run: |
           status=Succeeded
-          url=https://www.${ggl}.com
+          ggl=google
+          url_done=https://www.${ggl}.com
           echo $url_done
           case $status in
             Failed|Stopped|Skipped)
-              echo "msg=\\n${status} 정보: <$url_done|$ggl>" >> $GITHUB_ENV
+              echo "msg=\n${status} 정보: <$url_done|$ggl>" >> $GITHUB_ENV
               ;;
             Succeeded)
-              echo "msg=\\n${status} 정보: <$url_done|$ggl>" >> $GITHUB_ENV
+              echo "msg=\n${status} 정보: <$url_done|$ggl>" >> $GITHUB_ENV
               ;;
           esac
         
@@ -47,7 +48,7 @@ jobs:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
           payload: |
             {
-              "text": "aa <${{env.url2}}|url2> , <${{env.url3}}|url3>,${{env.msg}}",
+              "text": "aa ${{env.msg}}",
               "attachments": [
                 {
                   "color": "#36a64f",
