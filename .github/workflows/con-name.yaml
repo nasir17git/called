@@ -39,11 +39,15 @@ jobs:
         run: |
           status=Stopped
           url=https://www.${ggl}.com
-          if [ $status = "Failed" || "Stopped" || "Skipped" ]; then
-            echo "msg=\n${status} 정보: <$url|$ggl>" >> $GITHUB_ENV
-          elif [ $status = "Succeeded"]; then
-            echo "msg=\n${status} 정보: <$url|$ggl>" >> $GITHUB_ENV
-          fi
+          case $status in
+            Failed|Stopped|Skipped)
+              echo "msg=\\n${status} 정보: <$url|$ggl>" >> $GITHUB_ENV
+              ;;
+            Succeeded)
+              echo "msg=\\n${status} 정보: <$url|$ggl>" >> $GITHUB_ENV
+              ;;
+          esac
+        
       - name: Post to Slack channel
         id: slack
         uses: slackapi/slack-github-action@v1.24.0
