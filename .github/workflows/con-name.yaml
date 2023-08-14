@@ -34,7 +34,7 @@ jobs:
           echo $ggl
           echo $url_done
           echo "ggl=${ggl}" >> $GITHUB_ENV
-          echo "url_done=${deployment_id}" >> $GITHUB_ENV
+          echo "url_done=${url_done}" >> $GITHUB_ENV
 
       - name: make msg
         env:
