@@ -63,23 +63,16 @@ jobs:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
           payload: |
             {
-              "text": "aa ${{env.sha_short}}, ${{env.SHORT_SHA}} ${{env.msg}}",
+              "text": "${{ env.job_emoji }} <${{ github.event.repository.html_url }}|*${{ inputs.APPLICATION_NAME }}*>, <${{ github.event.repository.html_url }}/tree/${{ github.head_ref || github.ref_name }} |${{ github.head_ref || github.ref_name }} >, <${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}|* 🛠️ 빌드 ${{ job.status }}*>",
               "attachments": [
                 {
-                  "color": "#36a64f",
+                  "color": "${{ env.color }}",
                   "blocks": [
                     {
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "aaa \n bbb "
-                      }
-                    },
-                    {
-                      "type": "section",
-                      "text": {
-                        "type": "mrkdwn",
-                        "text": "bbb \n ccc"
+                        "text": "'<${{ github.event.repository.html_url }}/commits/${{ github.sha }}|${{ env.message }}>', ${{ env.sha_short }} by  ${{ github.actor }} in ${{ env.total_time }}."
                       }
                     }
                   ]
