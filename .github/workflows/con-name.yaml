@@ -37,7 +37,7 @@ jobs:
           status=Failed
       - name: make_msg
         run: |
-          status=Stopped
+          status=Succeeded
           url=https://www.${ggl}.com
           case $status in
             Failed|Stopped|Skipped)
