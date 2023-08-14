@@ -26,10 +26,14 @@ jobs:
           echo ${{github.sha}}
           echo "sha_short=${GITHUB_SHA::5}" >> $GITHUB_ENV
           echo "SHORT_SHA=`echo ${{github.sha}} | cut -c1-7`" >> $GITHUB_ENV
-      - name: make_msg
+      - name: set env
         run: |
           status=Succeeded
           ggl=google
+          url_done=https://www.${ggl}.com
+
+      - name: make msg
+        run: |
           url_done=https://www.${ggl}.com
           echo $url_done
           case $status in
