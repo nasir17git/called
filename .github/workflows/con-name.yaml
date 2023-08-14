@@ -41,7 +41,7 @@ jobs:
           url=https://www.${ggl}.com
           if [ $status = "Failed" || "Stopped" || "Skipped" ]; then
             echo "msg=\n${status} 정보: <$url|$ggl>" >> $GITHUB_ENV
-          elif if [ $status = "Succeeded"]; then
+          elif [ $status = "Succeeded"]; then
             echo "msg=\n${status} 정보: <$url|$ggl>" >> $GITHUB_ENV
           fi
       - name: Post to Slack channel
