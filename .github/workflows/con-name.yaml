@@ -31,9 +31,13 @@ jobs:
           status=Succeeded
           ggl=google
           url_done=https://www.${ggl}.com
+          echo $ggl
+          echo $url_done
 
       - name: make msg
         run: |
+          echo $ggl
+          echo $url_done
           url_done=https://www.${ggl}.com
           echo $url_done
           case $status in
