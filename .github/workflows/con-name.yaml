@@ -34,6 +34,16 @@ jobs:
           echo ${{env.url1}}
           echo ${{env.url2}}
           echo ${{env.url3}}
+          status=Failed
+      - name: make_msg
+        run: |
+          status=Stopped
+          url=https://www.${ggl}.com
+          if [ $status = "Failed" || "Stopped" || "Skipped" ]; then
+            echo "msg=\n${status} 정보: <$url|$ggl>" >> $GITHUB_ENV
+          elif if [ $status = "Succeeded"]; then
+            echo "msg=\n${status} 정보: <$url|$ggl>" >> $GITHUB_ENV
+          fi
       - name: Post to Slack channel
         id: slack
         uses: slackapi/slack-github-action@v1.24.0
@@ -43,7 +53,7 @@ jobs:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
           payload: |
             {
-              "text": "aa <${{env.url2}}|url2> , <${{env.url3}}|url3>",
+              "text": "aa <${{env.url2}}|url2> , <${{env.url3}}|url3>,${{env.msg}}",
               "attachments": [
                 {
                   "color": "#36a64f",
