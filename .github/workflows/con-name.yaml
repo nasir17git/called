@@ -24,8 +24,8 @@ jobs:
         run: |
           echo ${GITHUB_SHA}
           echo ${{github.sha}}
-          echo "sha_short=${GITHUB_SHA::6}" >> $GITHUB_ENV
-          echo "sha_short2=${{ github.sha:0:7 }}" >> $GITHUB_ENV
+          echo "sha_short=${GITHUB_SHA::5}" >> $GITHUB_ENV
+          echo "SHORT_SHA=`echo ${{github.sha}} | cut -c1-7`" >> $GITHUB_ENV
       - name: make_msg
         run: |
           status=Succeeded
@@ -50,7 +50,7 @@ jobs:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
           payload: |
             {
-              "text": "aa ${{env.sha_short}}, ${{env.sha_short2}} ${{env.msg}}",
+              "text": "aa ${{env.sha_short}}, ${{env.SHORT_SHA}} ${{env.msg}}",
               "attachments": [
                 {
                   "color": "#36a64f",
