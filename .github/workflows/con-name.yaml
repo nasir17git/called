@@ -23,23 +23,12 @@ jobs:
         run: |
           ggl=google
           url_done=https://www.${ggl}.com
-          echo "ggl=google" >> $GITHUB_ENV
-          echo "url1=https://www.$ggl.com" >> $GITHUB_ENV
 
-      - name: in_other_job
-        run: |
-          echo "url2=https://www.${ggl}.com" >> $GITHUB_ENV
-          echo "url3=${{ format('https://www.{0}.com', env.ggl)}}" >> $GITHUB_ENV
-      - name: check
-        run: |
-          echo ${{env.url1}}
-          echo ${{env.url2}}
-          echo ${{env.url3}}
-          status=Failed
       - name: make_msg
         run: |
           status=Succeeded
           url=https://www.${ggl}.com
+          echo $url_done
           case $status in
             Failed|Stopped|Skipped)
               echo "msg=\\n${status} 정보: <$url_done|$ggl>" >> $GITHUB_ENV
