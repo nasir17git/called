@@ -7,6 +7,22 @@ concurrency:
 
 on:
   workflow_call:
+    inputs:
+      SKIP_TEST:
+        # 빌드 테스트를 생략하려면 true
+        type: boolean
+      all:
+        type: boolean
+        description: check for all
+      aaa:
+        type: boolean
+        description: check for aaa
+      bbb:
+        type: boolean
+        description: check for bbb
+      ccc:
+        type: boolean
+        description: check for ccc
         
 jobs:
   reusable_workflow_job:
