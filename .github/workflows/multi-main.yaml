@@ -1,76 +1,76 @@
-name: Reusable Workflow
-run-name: aaa
+# name: Reusable Workflow
+# run-name: aaa
 
-concurrency:
-  group: "aaaa"
-  cancel-in-progress: false
+# concurrency:
+#   group: "aaaa"
+#   cancel-in-progress: false
 
-on:
-  workflow_call:
-    inputs:
-      SKIP_TEST:
-        # 빌드 테스트를 생략하려면 true
-        type: boolean
-      all:
-        type: booleans
-        description: check for all
-      aaa:
-        type: boolean
-        description: check for aaa
-      bbb:
-        type: boolean
-        description: check for bbb
-      ccc:
-        type: boolean
-        description: check for ccc
-      non-provided:
-        type: string
-        description: "input에 업서도 ㄱㅊ?"
-      pass:
-        type: string
-        description: between c&s
+# on:
+#   workflow_call:
+#     inputs:
+#       SKIP_TEST:
+#         # 빌드 테스트를 생략하려면 true
+#         type: boolean
+#       all:
+#         type: booleans
+#         description: check for all
+#       aaa:
+#         type: boolean
+#         description: check for aaa
+#       bbb:
+#         type: boolean
+#         description: check for bbb
+#       ccc:
+#         type: boolean
+#         description: check for ccc
+#       non-provided:
+#         type: string
+#         description: "input에 업서도 ㄱㅊ?"
+#       pass:
+#         type: string
+#         description: between c&s
         
-jobs:
-  reusable_workflow_job:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      # - run: sleep 30
-      # - name: Dump GitHub context
-      #   env:
-      #     GITHUB_CONTEXT: ${{ toJson(github) }}
-      #   run: |
-      #     echo "$GITHUB_CONTEXT"
+# jobs:
+#   reusable_workflow_job:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       # - run: sleep 30
+#       # - name: Dump GitHub context
+#       #   env:
+#       #     GITHUB_CONTEXT: ${{ toJson(github) }}
+#       #   run: |
+#       #     echo "$GITHUB_CONTEXT"
 
-      - name: Get Short SHA
-        run: |
-          echo ${GITHUB_SHA}
-          echo ${{github.sha}}
-          echo "sha_short=${GITHUB_SHA::5}" >> $GITHUB_ENV
-          echo "SHORT_SHA=`echo ${{github.sha}} | cut -c1-7`" >> $GITHUB_ENV
+#       - name: Get Short SHA
+#         run: |
+#           echo ${GITHUB_SHA}
+#           echo ${{github.sha}}
+#           echo "sha_short=${GITHUB_SHA::5}" >> $GITHUB_ENV
+#           echo "SHORT_SHA=`echo ${{github.sha}} | cut -c1-7`" >> $GITHUB_ENV
         
-      - name: Post to Slack channel
-        id: slack
-        uses: slackapi/slack-github-action@v1.24.0
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-        with:
-          channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
-          payload: |
-            {
-              "text": "echo ${{inputs.pass}}",
-              "attachments": [
-                {
-                  "color": "${{ env.color }}",
-                  "blocks": [
-                    {
-                      "type": "section",
-                      "text": {
-                        "type": "mrkdwn",
-                        "text": "aaa"
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
+#       - name: Post to Slack channel
+#         id: slack
+#         uses: slackapi/slack-github-action@v1.24.0
+#         env:
+#           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+#         with:
+#           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
+#           payload: |
+#             {
+#               "text": "echo ${{inputs.pass}}",
+#               "attachments": [
+#                 {
+#                   "color": "${{ env.color }}",
+#                   "blocks": [
+#                     {
+#                       "type": "section",
+#                       "text": {
+#                         "type": "mrkdwn",
+#                         "text": "aaa"
+#                       }
+#                     }
+#                   ]
+#                 }
+#               ]
+#             }

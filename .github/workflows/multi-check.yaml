@@ -1,5 +1,5 @@
-name: Reusable Workflow
-run-name: aaa
+name: multi-check
+run-name: multi-check
 
 on:
   workflow_call:
@@ -8,7 +8,7 @@ on:
         # 빌드 테스트를 생략하려면 true
         type: boolean
       all:
-        type: boolean
+        type: booleans
         description: check for all
       aaa:
         type: boolean
@@ -18,28 +18,25 @@ on:
         description: check for bbb
       ccc:
         type: boolean
-        description: check for ccc  
+        description: check for ccc
+      non-provided:
+        type: string
+        description: "input에 업서도 ㄱㅊ?"
       pass:
         type: string
+        description: between c&s
         
 jobs:
   reusable_workflow_job:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      - name: Dump inputs
-        env:
-          INPUT_CONTEXT: ${{ toJson(inputs) }}
-        run: |
-          echo "------"
-          echo "$INPUT_CONTEXT"
-          echo "------"
-          echo "${{ inputs.all }}"
-          echo "------"
-          echo "${{ inputs.pass }}"
-          echo "------"
-          echo "${{ inputs }}"
+      # - run: sleep 30
+      # - name: Dump GitHub context
+      #   env:
+      #     GITHUB_CONTEXT: ${{ toJson(github) }}
+      #   run: |
+      #     echo "$GITHUB_CONTEXT"
 
       - name: Get Short SHA
         run: |
@@ -57,7 +54,7 @@ jobs:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
           payload: |
             {
-              "text": "date",
+              "text": "echo ${{inputs.pass}}",
               "attachments": [
                 {
                   "color": "${{ env.color }}",
