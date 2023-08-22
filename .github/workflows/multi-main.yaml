@@ -12,7 +12,7 @@ on:
         # 빌드 테스트를 생략하려면 true
         type: boolean
       all:
-        type: boolean
+        type: booleans
         description: check for all
       aaa:
         type: boolean
@@ -26,6 +26,9 @@ on:
       non-provided:
         type: string
         description: "input에 업서도 ㄱㅊ?"
+      pass:
+        type: string
+        description: between c&s
         
 jobs:
   reusable_workflow_job:
@@ -55,7 +58,7 @@ jobs:
           channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
           payload: |
             {
-              "text": "date",
+              "text": "echo ${{inputs.pass}}",
               "attachments": [
                 {
                   "color": "${{ env.color }}",
