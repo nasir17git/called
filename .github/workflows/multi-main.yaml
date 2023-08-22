@@ -23,6 +23,9 @@ on:
       ccc:
         type: boolean
         description: check for ccc
+      non-provided:
+        type: string
+        description: "input에 업서도 ㄱㅊ?"
         
 jobs:
   reusable_workflow_job:
