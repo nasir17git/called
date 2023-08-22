@@ -8,7 +8,7 @@ on:
         # 빌드 테스트를 생략하려면 true
         type: boolean
       all:
-        type: booleans
+        type: boolean
         description: check for all
       aaa:
         type: boolean
