@@ -16,13 +16,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        modules: ${{ inputs.MODULE_LIST }}
+        modules: [${{ inputs.MODULE_LIST }}]
     steps:
       - uses: actions/checkout@v3
 
       - name: echoes
         id: echoes
         run: |
+          echo ${{ inputs.MODULE_LIST }}
+          echo ${{matrix.modules}}
           echo ":${{inputs.PROJECT_NAME}}:${{matrix.modules}}:assemble"
 
       - name: Post to Slack channel
