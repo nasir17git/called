@@ -8,8 +8,6 @@ on:
         type: string
       PROJECT_NAME:
         type: string
-      MODULE_LIST:
-        type: string
 
 jobs:
   echoes:
@@ -21,44 +19,44 @@ jobs:
         run: |
           echo ${{ inputs.MODULE_LIST }}
 
-  build:
-    runs-on: ubuntu-latest
-    needs: echoes
-    strategy:
-      matrix:
-        modules: ${{ fromJSON(github.event.inputs.MODULE_LIST)}}
-    steps:
-      - uses: actions/checkout@v3
+  # build:
+  #   runs-on: ubuntu-latest
+  #   needs: echoes
+  #   strategy:
+  #     matrix:
+  #       modules: ${{ fromJSON(github.event.inputs.MODULE_LIST)}}
+  #   steps:
+  #     - uses: actions/checkout@v3
 
-      - name: echoes
-        id: echoes
-        run: |
-          echo ${{ inputs.MODULE_LIST }}
-          echo ${{matrix.modules}}
-          echo ":${{inputs.PROJECT_NAME}}:${{matrix.modules}}:assemble"
+  #     - name: echoes
+  #       id: echoes
+  #       run: |
+  #         echo ${{ inputs.MODULE_LIST }}
+  #         echo ${{matrix.modules}}
+  #         echo ":${{inputs.PROJECT_NAME}}:${{matrix.modules}}:assemble"
 
-      - name: Post to Slack channel
-        id: slack
-        uses: slackapi/slack-github-action@v1.24.0
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-        with:
-          channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
-          payload: |
-            {
-              "text": "${{ env.job_emoji }} <${{ github.event.repository.html_url }}|*${{ inputs.APPLICATION_NAME }}*>, <${{ github.event.repository.html_url }}/tree/${{ github.head_ref || github.ref_name }} |${{ github.head_ref || github.ref_name }} >, <${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}|* 🛠️ 빌드 ${{ job.status }}*>",
-              "attachments": [
-                {
-                  "color": "${{ env.color }}",
-                  "blocks": [
-                    {
-                      "type": "section",
-                      "text": {
-                        "type": "mrkdwn",
-                        "text": "'<${{ github.event.repository.html_url }}/commits/${{ github.sha }}|msg>', ${{ env.sha_short }} by  ${{ github.actor }} in 03m 02s."
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
+  #     - name: Post to Slack channel
+  #       id: slack
+  #       uses: slackapi/slack-github-action@v1.24.0
+  #       env:
+  #         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+  #       with:
+  #         channel-id: 'C05J50BRRB3'  # Replace with your Slack channel ID or name
+  #         payload: |
+  #           {
+  #             "text": "${{ env.job_emoji }} <${{ github.event.repository.html_url }}|*${{ inputs.APPLICATION_NAME }}*>, <${{ github.event.repository.html_url }}/tree/${{ github.head_ref || github.ref_name }} |${{ github.head_ref || github.ref_name }} >, <${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}|* 🛠️ 빌드 ${{ job.status }}*>",
+  #             "attachments": [
+  #               {
+  #                 "color": "${{ env.color }}",
+  #                 "blocks": [
+  #                   {
+  #                     "type": "section",
+  #                     "text": {
+  #                       "type": "mrkdwn",
+  #                       "text": "'<${{ github.event.repository.html_url }}/commits/${{ github.sha }}|msg>', ${{ env.sha_short }} by  ${{ github.actor }} in 03m 02s."
+  #                     }
+  #                   }
+  #                 ]
+  #               }
+  #             ]
+  #           }
