@@ -16,6 +16,9 @@ on:
         type: boolean
       MODULE_3:
         type: boolean
+    outputs:
+      module_list:
+        value: ${{ jobs.setup.outputs.module_list }}
 
 jobs:
   setup:
