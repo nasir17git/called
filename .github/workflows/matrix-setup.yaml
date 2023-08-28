@@ -39,8 +39,8 @@ jobs:
           echo ${{ inputs.svc2 }}
           echo ${{ inputs.svc3 }}
           echo "-----"
-          echo ${{ fromJSON(inputs) }}
-          echo ${{ fromJSON(inputs.svc1) }}
-          echo ${{ fromJSON(inputs.svc2) }}
-          echo ${{ fromJSON(inputs.svc3) }}
+          # echo ${{ fromJSON(inputs) }}
+          # echo ${{ fromJSON(inputs.svc1) }}
+          # echo ${{ fromJSON(inputs.svc2) }}
+          # echo ${{ fromJSON(inputs.svc3) }}
         #   echo "module_list=[${{ inputs.svc1 }}, ${in_progress_check}" >> $GITHUB_ENV
