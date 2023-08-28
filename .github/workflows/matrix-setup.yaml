@@ -50,5 +50,5 @@ jobs:
 
       - name: see_result
         run: |
-          echo ${{ needs.job1.outputs.matrix }}
-          echo ${{ fromJSON(needs.job1.outputs.matrix) }}
+          echo ${{ needs.set-matrix.outputs.matrix }}
+          echo ${{ fromJSON(needs.set-matrix.outputs.matrix) }}
