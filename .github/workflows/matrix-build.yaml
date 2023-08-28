@@ -17,8 +17,10 @@ jobs:
       - name: echoes
         id: echoes
         run: |
+          echo "inputs"
           echo ${{ inputs.MODULE_LIST }}
-
+          echo "matrix"
+          echo ${{ matrix.MODULE_LIST }}
   # build:
   #   runs-on: ubuntu-latest
   #   needs: echoes
