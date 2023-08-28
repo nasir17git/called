@@ -23,8 +23,11 @@ jobs:
         run: |
           echo "$GITHUB_CONTEXT"
       - run: |
-          echo ${{ matrix }}
-
+          echo "matrix.MODULE_LIST"
+          echo ${{ matrix.MODULE_LIST }}
+          echo "inputs.MODULE_LIST"
+          echo ${{ inputs.MODULE_LIST }}
+          
       - name: Post to Slack channel
         id: slack
         uses: slackapi/slack-github-action@v1.24.0
