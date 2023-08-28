@@ -44,7 +44,7 @@ jobs:
           echo ${{ inputs.svc2 }}
           echo ${{ inputs.svc3 }}
           echo "-----"
-          echo 'module_list={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"},\"module\":\"svc3\"}]}' >> $GITHUB_ENV
+          echo 'matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"},\"module\":\"svc3\"}]}' >> $GITHUB_ENV
       # - id: set-matrix
       #   run: echo "matrix={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_ENV
 
