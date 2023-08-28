@@ -33,12 +33,13 @@ jobs:
 
       - name: check_inputs
         run: | 
+          echo ${{ inputs }}
           echo ${{ inputs.all }}
           echo ${{ inputs.svc1 }}
           echo ${{ inputs.svc2 }}
           echo ${{ inputs.svc3 }}
           echo "-----"
-          echo ${{ fromJSON(inputs.all) }}
+          echo ${{ fromJSON(inputs) }}
           echo ${{ fromJSON(inputs.svc1) }}
           echo ${{ fromJSON(inputs.svc2) }}
           echo ${{ fromJSON(inputs.svc3) }}
