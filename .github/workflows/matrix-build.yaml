@@ -1,4 +1,4 @@
-name: Multi Gradle Build workflow
+name: Multi Build workflow
 
 on:
   workflow_call:
@@ -16,28 +16,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: echoes
-        id: echoes
-        run: |
-          echo ${{ inputs.MODULE_LIST }}
-          echo ${{ github.event.inputs }}
-          echo ${{ fromJSON(inputs.MODULE_LIST)}}
 
-  build:
-    runs-on: ubuntu-latest
-    needs: echoes
-    strategy:
-      matrix:
-        modules: ${{ inputs.MODULE_LIST }}
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: echoes
-        id: echoes
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
-          echo ${{ inputs.MODULE_LIST }}
-          echo ${{matrix.modules}}
-          echo ":${{inputs.PROJECT_NAME}}:${{matrix.modules}}:assemble"
+          echo "$GITHUB_CONTEXT"
 
       - name: Post to Slack channel
         id: slack
