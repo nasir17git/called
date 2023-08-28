@@ -35,8 +35,10 @@ jobs:
     #       echo "$GITHUB_CONTEXT"
 
       - name: check_inputs
+        env:
+          INPUTS: ${{ toJSON(inputs) }}
         run: | 
-          echo ${{ toJSON(inputs) }}
+          echo "$INPUTS"
           echo ${{ inputs.all }}
           echo ${{ inputs.svc1 }}
           echo ${{ inputs.svc2 }}
