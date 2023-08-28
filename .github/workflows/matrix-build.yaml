@@ -22,6 +22,8 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           echo "$GITHUB_CONTEXT"
+      - run: |
+          echo ${{ matrix }}
 
       - name: Post to Slack channel
         id: slack
