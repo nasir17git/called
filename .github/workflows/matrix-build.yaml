@@ -20,7 +20,8 @@ jobs:
         id: echoes
         run: |
           echo ${{ inputs.MODULE_LIST }}
-          echo ${{ github.event.inputs.MODULE_LIST }}
+          echo ${{ github.event.inputs }}
+          echo ${{ fromJSON(inputs.MODULE_LIST)}}
 
 #   build:
 #     runs-on: ubuntu-latest
