@@ -44,4 +44,9 @@ jobs:
           echo ${{ inputs.svc2 }}
           echo ${{ inputs.svc3 }}
           echo "-----"
-          echo 'module_list=["svc1","svc2","svc3"]' >> $GITHUB_ENV
+          echo 'module_list={\"include\":[\"svc1\",\"svc2\",\"svc3\"]}' >> $GITHUB_ENV
+        
+      - name: see_result
+        run: |
+          echo ${{env.module_list}}
+          echo ${{fromJSON(env.module_list)}}
