@@ -46,9 +46,9 @@ jobs:
           # echo "-----"
           # echo 'module_list={\"include\":[{\"svc1\"},{\"svc2\"},\"svc3\"]}' >> $GITHUB_ENV
       - id: set-matrix
-        run: echo "matrix={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_OUTPUT
+        run: echo "matrix={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_ENV
 
       - name: see_result
         run: |
-          echo ${{ needs.set-matrix.outputs.matrix }}
-          echo ${{ fromJSON(needs.set-matrix.outputs.matrix) }}
+          echo ${{ env.matrix }}
+          echo ${{ fromJSON(env.matrix) }}
