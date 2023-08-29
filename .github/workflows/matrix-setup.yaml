@@ -10,12 +10,6 @@ on:
         type: string
       MODULE_ALL:
         type: string
-      MODULE_1:
-        type: string
-      MODULE_2:
-        type: string
-      MODULE_3:
-        type: string
       ALL:
         type: string
     outputs:
@@ -30,11 +24,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: |
-          echo "$GITHUB_CONTEXT"
+      # - name: Dump GitHub context
+      #   env:
+      #     GITHUB_CONTEXT: ${{ toJson(github) }}
+      #   run: |
+      #     echo "$GITHUB_CONTEXT"
 
       - name: check_inputs
         env:
@@ -43,18 +37,18 @@ jobs:
           echo "-----env"
           echo "$INPUTS"
           # echo "-----JsonString"
-          # echo ${{ inputs.ALL }}
-          echo "-----Json"
-          echo ${{ fromJSON(inputs.ALL) }}
+          echo ${{ inputs.ALL }} | jq keys
+          # echo "-----Json"
+          # echo ${{ fromJSON(inputs.ALL) }}
 
           echo "-----"
           echo 'module_list=["svc1","svc2","svc3"]' >> $GITHUB_ENV
  
           echo 'matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"},\"module\":\"svc3\"}]}' >> $GITHUB_ENV
 
-        #   - id: set-matrix
-        # run: |
-        #   if [ ${{ MODULE_ALL}} == "true" ]; then
+          - id: set-matrix
+        run: |
+          if [ ${{ MODULE_ALL}} == "true" ]; then
             
       # - name: see_result
       #   run: |
