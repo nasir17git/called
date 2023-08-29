@@ -8,14 +8,6 @@ on:
         type: string
       PROJECT_NAME:
         type: string
-      MODULE_ALL:
-        type: boolean
-      MODULE_1:
-        type: boolean
-      MODULE_2:
-        type: boolean
-      MODULE_3:
-        type: boolean
       ALL:
         type: string
     outputs:
@@ -30,36 +22,32 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-    #   - name: Dump GitHub context
-    #     env:
-    #       GITHUB_CONTEXT: ${{ toJson(github) }}
-    #     run: |
-    #       echo "$GITHUB_CONTEXT"
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
 
       - name: check_inputs
         env:
           INPUTS: ${{ toJSON(inputs) }}
         run: | 
+          echo "-----env"
           echo "$INPUTS"
-          echo "--- workflow_dispatch"
-          echo ${{ inputs.all }}
-          echo ${{ inputs.svc1 }}
-          echo ${{ inputs.svc2 }}
-          echo ${{ inputs.svc3 }}
-          echo "--- with"
-          echo "---workflow_dispatch"
-          echo ${{ inputs.MODULE_ALL }}
-          echo ${{ inputs.MODULE_1 }}
-          echo ${{ inputs.MODULE_2 }}
-          echo ${{ inputs.MODULE_3 }}
-          echo ${{ inputs.ALL}}
+          echo "-----JsonString"
+          echo ${{ inputs.ALL }}
+          echo "-----Json"
+          echo ${{ fromJSON(inputs.ALL) }}
+
           echo "-----"
           echo 'module_list=["svc1","svc2","svc3"]' >> $GITHUB_ENV
  
           echo 'matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"},\"module\":\"svc3\"}]}' >> $GITHUB_ENV
-      # - id: set-matrix
-      #   run: echo "matrix={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_ENV
 
+        #   - id: set-matrix
+        # run: |
+        #   if [ ${{ MODULE_ALL}} == "true" ]; then
+            
       # - name: see_result
       #   run: |
       #     echo ${{ env.matrix }}
