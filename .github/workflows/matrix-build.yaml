@@ -20,7 +20,7 @@ jobs:
           echo "inputs"
           echo ":${{ inputs.MODULE_LIST }}:${{inputs.APPLICATION_NAME}}:inputs-check"
           echo "matrix"
-          echo ":${{ inputs.MODULE_LIST }}:${{inputs.APPLICATION_NAME}}:matrix-check"
+          echo ":${{ matrix.MODULE_LIST }}:${{matrix.APPLICATION_NAME}}:matrix-check"
   # build:
   #   runs-on: ubuntu-latest
   #   needs: echoes
