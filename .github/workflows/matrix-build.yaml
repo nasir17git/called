@@ -25,7 +25,7 @@ jobs:
           echo "inputs"
           echo ":${{ inputs.MODULE_NAME }}:${{inputs.APPLICATION_NAME}}:inputs-check"
           echo "matrix"
-          echo ":${{ matrix.MODULE_NAME }}:${{matrix.APPLICATION_NAME}}:matrix-check"
+          echo ":${{ matrix.module }}:${{inputs.APPLICATION_NAME}}:matrix-check"
           echo "---"
           echo "${{env.MATRIX}}"
           echo "${{env.INPUTS}}"
