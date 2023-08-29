@@ -42,8 +42,8 @@ jobs:
         run: | 
           echo "-----env"
           echo "$INPUTS"
-          echo "-----JsonString"
-          echo ${{ inputs.ALL }}
+          # echo "-----JsonString"
+          # echo ${{ inputs.ALL }}
           echo "-----Json"
           echo ${{ fromJSON(inputs.ALL) }}
 
