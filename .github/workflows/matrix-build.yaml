@@ -8,6 +8,8 @@ on:
         type: string
       PROJECT_NAME:
         type: string
+      MODULE_LIST:
+        type: string
       
 jobs:
   echoes:
