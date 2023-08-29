@@ -53,5 +53,5 @@ jobs:
             
       - name: see_result
         run: |
-          echo ${{ env.matrix }}
-          echo ${{ fromJSON(env.matrix) }}
+          echo ${{ env.matrix_test }}
+          echo ${{ fromJSON(env.matrix_test) }}
