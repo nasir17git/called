@@ -51,7 +51,7 @@ jobs:
         # run: |
         #   if [ ${{ MODULE_ALL}} == "true" ]; then
             
-      # - name: see_result
-      #   run: |
-      #     echo ${{ env.matrix }}
-      #     echo ${{ fromJSON(env.matrix) }}
+      - name: see_result
+        run: |
+          echo ${{ env.matrix }}
+          echo ${{ fromJSON(env.matrix) }}
