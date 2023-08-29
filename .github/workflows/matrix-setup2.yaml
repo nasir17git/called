@@ -20,7 +20,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      matrix_test: ${{ env.matrix }}
+      matrix: ${{ env.matrix }}
     steps:
       - uses: actions/checkout@v3
 
@@ -53,5 +53,5 @@ jobs:
             
       - name: see_result
         run: |
-          # echo ${{ env.matrix }}
+          echo ${{ env.matrix }}
           echo ${{ fromJSON(env.matrix) }}
