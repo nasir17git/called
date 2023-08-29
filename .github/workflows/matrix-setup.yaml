@@ -16,6 +16,8 @@ on:
         type: boolean
       MODULE_3:
         type: boolean
+      ALL:
+        type: string
     outputs:
       module_list:
         value: ${{ jobs.setup.outputs.module_list }}
@@ -39,10 +41,18 @@ jobs:
           INPUTS: ${{ toJSON(inputs) }}
         run: | 
           echo "$INPUTS"
+          echo "--- workflow_dispatch"
           echo ${{ inputs.all }}
           echo ${{ inputs.svc1 }}
           echo ${{ inputs.svc2 }}
           echo ${{ inputs.svc3 }}
+          echo "--- with"
+          echo "---workflow_dispatch"
+          echo ${{ inputs.MODULE_ALL }}
+          echo ${{ inputs.MODULE_1 }}
+          echo ${{ inputs.MODULE_2 }}
+          echo ${{ inputs.MODULE_3 }}
+          echo ${{ inputs.ALL}}
           echo "-----"
           echo 'module_list=["svc1","svc2","svc3"]' >> $GITHUB_ENV
  
