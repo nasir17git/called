@@ -13,14 +13,14 @@ on:
       ALL:
         type: string
     outputs:
-      module_list:
-        value: ${{ jobs.setup.outputs.module_list }}
+      matrix:
+        value: ${{ jobs.setup.outputs.matrix }}
 
 jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      module_list: ${{ env.matrix }}
+      matrix: ${{ env.matrix }}
     steps:
       - uses: actions/checkout@v3
 
@@ -45,7 +45,7 @@ jobs:
           echo "-----"
           # echo 'module_list=["svc1","svc2","svc3"]' >> $GITHUB_ENV
  
-          echo 'matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"},{\"module\":\"svc3\"}]}' >> $GITHUB_ENV
+          echo "matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"},{\"module\":\"svc3\"}]}" >> $GITHUB_ENV
 
         # - id: set-matrix
         # run: |
