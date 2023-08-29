@@ -22,11 +22,11 @@ jobs:
           MATRIX: ${{ toJSON(matrix) }}
           INPUTS: ${{ toJSON(inputs) }}
         run: |
-          echo "inputs"
-          echo ":${{ inputs.module }}:${{inputs.APPLICATION_NAME}}:inputs-check"
-          echo "matrix"
-          echo ":${{ matrix.module }}:${{matrix.APPLICATION_NAME}}:matrix-check"
-          echo "---"
+          # echo "inputs"
+          # echo ":${{ inputs.module }}:${{inputs.APPLICATION_NAME}}:inputs-check"
+          # echo "matrix"
+          # echo ":${{ matrix.module }}:${{matrix.APPLICATION_NAME}}:matrix-check"
+          # echo "---"
           echo "${{env.MATRIX}}"
           echo "${{env.INPUTS}}"
   # build:

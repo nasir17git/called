@@ -42,12 +42,16 @@ jobs:
           # echo ${{ fromJSON(inputs.ALL) }}
 
           echo "-----"
+          # echo 'module_list=["svc1","svc2","svc3"]' >> $GITHUB_ENV
+ 
+          # echo "matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"},{\"module\":\"svc3\"}]}" >> $GITHUB_ENV
           echo "matrix={\"include\":[{\"project\":\"foo\"},{\"project\":\"bar\"}]}" >> $GITHUB_ENV
+
         # - id: set-matrix
         # run: |
         #   if [ ${{ MODULE_ALL}} == "true" ]; then
             
       - name: see_result
         run: |
-          echo ${{ env.matrix }}
+          # echo ${{ env.matrix }}
           echo ${{ fromJSON(env.matrix) }}
