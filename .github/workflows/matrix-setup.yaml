@@ -46,9 +46,9 @@ jobs:
  
           echo 'matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"},\"module\":\"svc3\"}]}' >> $GITHUB_ENV
 
-          - id: set-matrix
-        run: |
-          if [ ${{ MODULE_ALL}} == "true" ]; then
+        # - id: set-matrix
+        # run: |
+        #   if [ ${{ MODULE_ALL}} == "true" ]; then
             
       # - name: see_result
       #   run: |
