@@ -37,7 +37,8 @@ jobs:
           echo "-----env"
           echo "$INPUTS"
           # echo "-----JsonString"
-          echo -ne ${{ inputs.ALL }} | jq keys
+          echo -ne ${{ inputs.ALL.all }} | jq keys
+          echo -ne ${{ inputs.ALL.svc1 }} | jq keys
           # echo "-----Json"
           # echo ${{ fromJSON(inputs.ALL) }}
 
