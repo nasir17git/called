@@ -34,19 +34,18 @@ jobs:
         env:
           INPUTS: ${{ toJSON(inputs) }}
         run: | 
-          # echo "-----env"
-          # echo "$INPUTS"
-          # # echo "-----JsonString"
-          # echo -ne ${{ inputs.ALL.all }} | jq keys
-          # echo -ne ${{ inputs.ALL.svc1 }} | jq keys
-          # # echo "-----Json"
-          # # echo ${{ fromJSON(inputs.ALL) }}
+          echo "-----env"
+          echo "$INPUTS" >> inputs.json
+          echo "-----get keys"
+          cat inputs.json | jq keys
+          # echo "-----Json"
+          # echo ${{ fromJSON(inputs.ALL) }}
 
           echo "-----"
           # echo 'module_list=["svc1","svc2","svc3"]' >> $GITHUB_ENV
  
           # echo "matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"},{\"module\":\"svc3\"}]}" >> $GITHUB_ENV
-          echo "matrix_test=[\"['svc1', 'svc2', 'svc3']\",\"['aaa','bbb','ccc']\"]" >> GITHUB_ENV
+          echo "matrix_test=[\"['svc1', 'svc2', 'svc3']\",\"['aaa','bbb','ccc']\"]" >> $GITHUB_ENV
         # - id: set-matrix
         # run: |
         #   if [ ${{ MODULE_ALL}} == "true" ]; then
