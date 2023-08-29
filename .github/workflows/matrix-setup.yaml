@@ -20,7 +20,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-        module_list: ${{ env.module_list }}
+      module_list: ${{ env.matrix }}
     steps:
       - uses: actions/checkout@v3
 
@@ -45,7 +45,7 @@ jobs:
           echo "-----"
           # echo 'module_list=["svc1","svc2","svc3"]' >> $GITHUB_ENV
  
-          echo 'module_list={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"},{\"module\":\"svc3\"}]}' >> $GITHUB_ENV
+          echo 'matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"},{\"module\":\"svc3\"}]}' >> $GITHUB_ENV
 
         # - id: set-matrix
         # run: |
