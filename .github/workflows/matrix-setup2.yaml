@@ -50,6 +50,8 @@ jobs:
         # - id: set-matrix
         # run: |
         #   if [ ${{ MODULE_ALL}} == "true" ]; then
+        #     all > true
+        #   else 
             
       - name: see_result
         run: |
