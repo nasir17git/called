@@ -1,8 +1,11 @@
 {
-    "aaa": false,
-    "abc": false,
-    "all": false,
-    "svc1": true,
-    "svc2": true,
-    "svc3": false
+  "aaa": false,
+  "abc": false,
+  "all": "{\n  \"aaa\": false,\n  \"abc\": false,\n  \"all\": false,\n  \"svc1\": true,\n  \"svc2\": true,\n  \"svc3\": false\n}",
+  "svc1": true,
+  "svc2": true,
+  "svc3": false,
+  "APPLICATION_NAME": "full-app-name",
+  "PROJECT_NAME": "app-name",
+  "MODULE_ALL": "false"
   }
