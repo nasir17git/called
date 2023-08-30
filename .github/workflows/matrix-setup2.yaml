@@ -43,12 +43,14 @@ jobs:
           echo "-----"
           echo $matrix_with_sed
           echo '{\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"}]}'
-          # echo "matrix=$matrix_with_sed" >> $GITHUB_ENV
+          echo "matrix=$matrix_with_sed" >> $GITHUB_ENV
 
           echo "-----"
+          echo "matrix=$matrix_with_sed"
+          echo "matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"}]}"
           # echo 'module_list=["svc1","svc2","svc3"]' >> $GITHUB_ENV
  
-          echo "matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"}]}" >> $GITHUB_ENV
+          # echo "matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"}]}" >> $GITHUB_ENV
           # echo "matrix={\"include\":[{\"project\":\"foo\"},{\"project\":\"bar\"}]}" >> $GITHUB_ENV
 
         # - id: set-matrix
