@@ -64,7 +64,7 @@ jobs:
         #     all > true
         #   else 
             
-      - name: see_result
-        run: |
-          echo "${{ env.matrix }}"
-          echo "${{ fromJSON(env.matrix) }}"
+      # - name: see_result
+      #   run: |
+      #     echo "${{ env.matrix }}"
+      #     echo "${{ fromJSON(env.matrix) }}"
