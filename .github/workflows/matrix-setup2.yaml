@@ -37,11 +37,11 @@ jobs:
           echo "-----env"
           echo "$INPUTS" >> inputs.json
           echo "-----get keys"
-          cat inputs.json | jq -c keys
           filtered_modules=$(cat inputs.json | jq -rc 'to_entries | map(select(.value == true)) | map({module: .key})')
           matrix="{\"include\":$filtered_modules}"
           matrix_with_sed=$(echo "$matrix" | sed 's/"/\\\"/g')
           echo "-----"
+          echo $matrix_with_sed
           echo "matrix=$matrix_with_sed" >> $GITHUB_ENV
 
           echo "-----"
