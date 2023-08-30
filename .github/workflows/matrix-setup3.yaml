@@ -58,4 +58,5 @@ jobs:
         run: | 
           echo "-----env"
           echo "$INPUTS" >> inputs.json
-          echo "matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"}]}" >> $GITHUB_ENV
+          echo "matrix_origin={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"}]}"
+          echo "matrix=$matrix_origin" >> $GITHUB_ENV
