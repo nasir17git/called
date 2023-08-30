@@ -1,0 +1,61 @@
+name: Matrixsetup workflow
+
+on:
+  workflow_call:
+    inputs:
+      APPLICATION_NAME:
+        required: true
+        type: string
+      PROJECT_NAME:
+        type: string
+      MODULE_ALL:
+        type: string
+      ALL:
+        type: string
+    outputs:
+      matrix:
+        value: ${{ jobs.setup.outputs.matrix }}
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ env.matrix }}
+    steps:
+      - uses: actions/checkout@v3
+
+      # - name: check_inputs
+      #   env:
+      #     INPUTS: ${{ toJSON(inputs) }}
+      #   run: | 
+      #     echo "-----env"
+      #     echo "$INPUTS" >> inputs.json
+      #     echo "-----get checked"
+      #     filtered_modules=$(cat inputs.json | jq -rc 'to_entries | map(select(.value == true)) | map({module: .key})')
+      #     matrix="{\"include\":$filtered_modules}"
+      #     matrix_with_sed=$(echo "$matrix" | sed 's/"/\\\"/g')
+      #     echo $matrix
+
+      #     echo "-----values"
+      #     echo "echo \$matrix_with_sed"
+      #     echo $matrix_with_sed
+      #     echo "echo '{\"include\":[{\"module\":\"API\"},{\"module\":\"BATCH\"}]}'"
+      #     echo '{\"include\":[{\"module\":\"API\"},{\"module\":\"BATCH\"}]}'
+      #     echo "matrix=$matrix_with_sed" >> $GITHUB_ENV
+
+      #     echo "-----k-v"
+      #     echo "echo "matrix=\$matrix_with_sed""
+      #     echo "matrix=$matrix_with_sed"
+      #     echo 'echo "matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"}]}"'
+      #     echo "matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"}]}"
+ 
+      #     # echo "matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"}]}" >> $GITHUB_ENV
+      #     # echo "matrix={\"include\":[{\"project\":\"foo\"},{\"project\":\"bar\"}]}" >> $GITHUB_ENV
+
+      - name: check_inputs
+        env:
+          INPUTS: ${{ toJSON(inputs) }}
+        run: | 
+          echo "-----env"
+          echo "$INPUTS" >> inputs.json
+          echo "matrix=[\"['aaa', 'bbb', 'ccc']\",\"['ddd', 'eee', 'fff']\"]" >> $GITHUB_ENV
