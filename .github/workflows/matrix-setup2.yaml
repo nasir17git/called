@@ -43,14 +43,16 @@ jobs:
           echo $matrix
 
           echo "-----values"
-          echo "echo $matrix_with_sed"
+          echo "echo \$matrix_with_sed"
           echo $matrix_with_sed
           echo "echo '{\"include\":[{\"module\":\"API\"},{\"module\":\"BATCH\"}]}'"
           echo '{\"include\":[{\"module\":\"API\"},{\"module\":\"BATCH\"}]}'
           echo "matrix=$matrix_with_sed" >> $GITHUB_ENV
 
           echo "-----k-v"
+          echo "echo "matrix=\$matrix_with_sed""
           echo "matrix=$matrix_with_sed"
+          echo 'echo "matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"}]}"'
           echo "matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"}]}"
  
           # echo "matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"}]}" >> $GITHUB_ENV
