@@ -42,12 +42,12 @@ jobs:
           matrix_with_sed=$(echo "$matrix" | sed 's/"/\\\"/g')
           echo "-----"
           echo $matrix_with_sed
-          echo "matrix=$matrix_with_sed" >> $GITHUB_ENV
+          # echo "matrix=$matrix_with_sed" >> $GITHUB_ENV
 
           echo "-----"
           # echo 'module_list=["svc1","svc2","svc3"]' >> $GITHUB_ENV
  
-          # echo "matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"},{\"module\":\"svc3\"}]}" >> $GITHUB_ENV
+          echo "matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"}]}" >> $GITHUB_ENV
           # echo "matrix={\"include\":[{\"project\":\"foo\"},{\"project\":\"bar\"}]}" >> $GITHUB_ENV
 
         # - id: set-matrix
