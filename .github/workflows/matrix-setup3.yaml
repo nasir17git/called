@@ -59,10 +59,10 @@ jobs:
           echo "-----env"
           echo "$INPUTS" >> inputs.json
 
-          # 이건 에러
+          # test1
           echo "matrix_origin={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"}]}"
           echo "matrix=$matrix_origin" >> $GITHUB_ENV
 
-          # 이건?
-          echo "matrix_origin={"include":[{"module":"svc1"},{"module":"svc2"}]}"
-          echo "matrix=$matrix_origin" >> $GITHUB_ENV
+          # # 이건?
+          # echo "matrix_origin={"include":[{"module":"svc1"},{"module":"svc2"}]}"
+          # echo "matrix=$matrix_origin" >> $GITHUB_ENV
