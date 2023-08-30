@@ -42,6 +42,7 @@ jobs:
           matrix_with_sed=$(echo "$matrix" | sed 's/"/\\\"/g')
           echo "-----"
           echo $matrix_with_sed
+          echo '{\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"}]}'
           # echo "matrix=$matrix_with_sed" >> $GITHUB_ENV
 
           echo "-----"
