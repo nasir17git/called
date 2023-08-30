@@ -61,7 +61,7 @@ jobs:
 
           # 성공 케이스
           echo "matrix_origin={\"include\":\[{\"module\":\"svc1\"},{\"module\":\"svc2\"}\]}"
-          echo "matrix={\"include\":\[{\"module\":\"svc1\"},{\"module\":\"svc2\"}\]}" >> $GITHUB_ENV
+          echo "matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"}]}" >> $GITHUB_ENV
 
           # test1
           # echo "matrix_origin={\"include\":\[{\"module\":\"svc1\"},{\"module\":\"svc2\"}\]}"
