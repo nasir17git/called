@@ -83,7 +83,7 @@ jobs:
           env
           echo "----- export 확인"
           export
-  setup:
+  check:
     runs-on: ubuntu-latest
     needs: setup
     steps:
