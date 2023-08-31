@@ -63,7 +63,7 @@ jobs:
           # 성공 케이스
           echo "----- 성공 케이스"
           echo "matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"}]}"
-          # echo "matrix={\"include\":[{\"module\":\"svc1\"},{\"module\":\"svc2\"}]}" >> $GITHUB_ENV
+          echo "matrix={\"include\":[{\"module\":\"api\"},{\"module\":\"batch\"}]}" >> $GITHUB_ENV
 
           # test1
           echo "----- 변수로 넣었음"
