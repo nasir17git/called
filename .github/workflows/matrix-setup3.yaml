@@ -20,7 +20,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ env.matrix }}
+      matrix: ${{ env.mat_list }}
     steps:
       - uses: actions/checkout@v3
 
