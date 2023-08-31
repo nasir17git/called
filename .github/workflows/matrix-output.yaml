@@ -92,22 +92,22 @@ jobs:
           result1: ${{needs.setup.outputs.matrix1}}
           result2: ${{needs.setup.outputs.matrix2}}
           result3: ${{needs.setup.outputs.dummy1}}
-      run: |
-        echo "----- env"    
-        echo $result0
-        echo $result1
-        echo $result2
-        echo $result3
-
-        echo "----- outputs"    
-        echo ${{steps.make.outputs.matrix0}}
-        echo ${{steps.make.outputs.matrix1}}
-        echo ${{steps.make.outputs.matrix2}}
-        echo ${{steps.make.outputs.dummy1}}
-
-        echo "----- needs"
-        echo ${{needs.make.outputs.matrix0}}
-        echo ${{needs.make.outputs.matrix1}}
-        echo ${{needs.make.outputs.matrix2}}
-        echo ${{needs.make.outputs.dummy1}}
+        run: |
+          echo "----- env"    
+          echo $result0
+          echo $result1
+          echo $result2
+          echo $result3
+  
+          echo "----- outputs"    
+          echo ${{steps.make.outputs.matrix0}}
+          echo ${{steps.make.outputs.matrix1}}
+          echo ${{steps.make.outputs.matrix2}}
+          echo ${{steps.make.outputs.dummy1}}
+  
+          echo "----- needs"
+          echo ${{needs.make.outputs.matrix0}}
+          echo ${{needs.make.outputs.matrix1}}
+          echo ${{needs.make.outputs.matrix2}}
+          echo ${{needs.make.outputs.dummy1}}
 
