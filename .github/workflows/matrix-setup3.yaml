@@ -94,6 +94,14 @@ jobs:
           echo ${{env.dummy1}}
           echo $dummy1
 
+          echo "----- matrix data 확인"
+          echo ${{env.matrix}}
+          echo $matrix
+          echo ${{env.matrix1}}
+          echo $matrix1
+          echo ${{env.matrix2}}
+          echo $matrix2
+
           echo "----- env 확인"
           env
           echo "----- export 확인"
