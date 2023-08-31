@@ -78,7 +78,15 @@ jobs:
           echo $matrix_origin2
           echo "matrix=$matrix_origin2" >> $GITHUB_ENV
           echo $matrix2
-        
+
+          echo "----- env 확인"
+          env
+          echo "----- export 확인"
+          export
+
       - name: check
         run: |
+          echo "----- env 확인"
           env
+          echo "----- export 확인"
+          export
