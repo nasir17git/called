@@ -63,12 +63,12 @@ jobs:
           if [ ${{ inputs.MODULE_ALL }} == "true" ]; then
             filtered_modules=$(cat inputs.json | jq -rc 'with_entries(select(.key | startswith("DEPLOY_"))) | to_entries | map({module: .key})')
             mat_list="{\"include\":$filtered_modules}"
-            matrix_with_sed=$(echo "$mat_list" | sed 's/"/\\\"/g' | sed 's/DEPLOY_//g')
+            matrix_with_sed=$(echo "$mat_list" | sed 's/DEPLOY_//g')
             echo $matrix_with_sed
           else 
             filtered_modules=$(cat inputs.json | jq -rc 'with_entries(select(.key | startswith("DEPLOY_"))) | to_entries | map(select(.value == true)) | map({module: .key})')
             mat_list="{\"include\":$filtered_modules}"
-            matrix_with_sed=$(echo "$mat_list" | sed 's/"/\\\"/g' | sed 's/DEPLOY_//g')
+            matrix_with_sed=$(echo "$mat_list" | sed 's/DEPLOY_//g')
             echo $matrix_with_sed
           fi
 
