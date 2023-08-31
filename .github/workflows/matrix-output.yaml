@@ -28,6 +28,11 @@ jobs:
         id: make
         env:
           INPUTS: ${{ toJSON(inputs) }}
+        outputs:
+          matrix0: ${{steps.make.outputs.matrix}}
+          matrix1: ${{steps.make.outputs.matrix1}}
+          matrix2: ${{steps.make.outputs.matrix2}}
+          dummy1: ${{steps.make.outputs.dummy1}}
         run: | 
           echo "----- env"
           echo "$INPUTS"
