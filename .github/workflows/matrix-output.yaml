@@ -14,13 +14,16 @@ on:
         type: string
     outputs:
       matrix:
-        value: ${{ jobs.setup.outputs.matrix }}
+        value: ${{ jobs.setup.outputs.matrix0 }}
 
 jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.make.outputs.matrix1 }}
+      matrix0: ${{steps.make.outputs.matrix0}}
+      matrix1: ${{steps.make.outputs.matrix1}}
+      matrix2: ${{steps.make.outputs.matrix2}}
+      dummy1: ${{steps.make.outputs.dummy1}}
     steps:
       - uses: actions/checkout@v3
 
@@ -28,11 +31,6 @@ jobs:
         id: make
         env:
           INPUTS: ${{ toJSON(inputs) }}
-        outputs:
-          matrix0: ${{steps.make.outputs.matrix}}
-          matrix1: ${{steps.make.outputs.matrix1}}
-          matrix2: ${{steps.make.outputs.matrix2}}
-          dummy1: ${{steps.make.outputs.dummy1}}
         run: | 
           echo "----- env"
           echo "$INPUTS"
@@ -40,8 +38,8 @@ jobs:
 
           # 성공 케이스
           echo "----- 성공 케이스"
-          echo "matrix={\"include\":[{\"module\":\"api\"},{\"module\":\"batch\"}]}"
-          echo "matrix={\"include\":[{\"module\":\"api\"},{\"module\":\"batch\"}]}" >> "$GITHUB_OUTPUT"
+          echo "matrix0={\"include\":[{\"module\":\"api\"},{\"module\":\"batch\"}]}"
+          echo "matrix0={\"include\":[{\"module\":\"api\"},{\"module\":\"batch\"}]}" >> "$GITHUB_OUTPUT"
 
           # test1
           echo "----- 변수로 넣었음"
@@ -74,8 +72,8 @@ jobs:
           echo $dummy1
 
           echo "----- matrix data 확인"
-          echo ${{steps.make.outputs.matrix}}
-          echo $matrix
+          echo ${{steps.make.outputs.matrix0}}
+          echo $matrix0
           echo ${{steps.make.outputs.matrix1}}
           echo $matrix1
           echo ${{steps.make.outputs.matrix2}}
@@ -85,3 +83,31 @@ jobs:
           env
           echo "----- export 확인"
           export
+  setup:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - env: 
+          result0: ${{needs.setup.outputs.matrix0}}
+          result1: ${{needs.setup.outputs.matrix1}}
+          result2: ${{needs.setup.outputs.matrix2}}
+          result3: ${{needs.setup.outputs.dummy1}}
+      run: |
+        echo "----- env"    
+        echo $result0
+        echo $result1
+        echo $result2
+        echo $result3
+
+        echo "----- outputs"    
+        echo ${{steps.make.outputs.matrix0}}
+        echo ${{steps.make.outputs.matrix1}}
+        echo ${{steps.make.outputs.matrix2}}
+        echo ${{steps.make.outputs.dummy1}}
+
+        echo "----- needs"
+        echo ${{needs.make.outputs.matrix0}}
+        echo ${{needs.make.outputs.matrix1}}
+        echo ${{needs.make.outputs.matrix2}}
+        echo ${{needs.make.outputs.dummy1}}
+
