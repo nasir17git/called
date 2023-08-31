@@ -67,21 +67,18 @@ jobs:
 
           # test1
           echo "----- 변수로 넣었음"
-          echo "matrix_origin={\"include\":[{\"module\":\"api\"},{\"module\":\"batch\"}]}"
-          echo $matrix_origin
-          # echo "matrix=$matrix_origin" >> $GITHUB_ENV
-          echo $matrix
+          echo "matrix_origin1={\"include\":[{\"module\":\"api\"},{\"module\":\"batch\"}]}"
+          echo $matrix_origin1
+          # echo "matrix=$matrix_origin1" >> $GITHUB_ENV
+          echo $matrix1
 
           # test2
           echo "----- \를 지웠음"
-          echo "matrix_origin={"include":[{"module":"api"},{"module":"batch"}]}"
-          echo $matrix_origin
-          echo "matrix=$matrix_origin" >> $GITHUB_ENV
-          echo $matrix
+          echo "matrix_origin2={"include":[{"module":"api"},{"module":"batch"}]}"
+          echo $matrix_origin2
+          echo "matrix=$matrix_origin2" >> $GITHUB_ENV
+          echo $matrix2
         
-      # - name: check
-      #   run: |
-      #     echo " ----- "
-      #     echo "${{env.matrix}}"
-      #     echo " ----- "
-      #     echo "${{fromJSON(env.fromJSON)}}"
+      - name: check
+        run: |
+          env
