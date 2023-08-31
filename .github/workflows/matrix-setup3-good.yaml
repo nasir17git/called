@@ -40,7 +40,7 @@ jobs:
           # test1
           echo "----- 변수로 넣었음"
           echo "matrix_origin1={\"include\":[{\"module\":\"api\"},{\"module\":\"batch\"}]}"
-          matrix_origin1={\"include\":[{\"module\":\"api\"},{\"module\":\"batch\"}]}
+          matrix_origin1={\"include\":[{\"module\":\"api\"},{\"module\":\"batch\"},{\"module\":\"ddd\"}]}
           echo $matrix_origin1
           echo "matrix1=$matrix_origin1" >> $GITHUB_ENV
           matrix1=$matrix_origin1
