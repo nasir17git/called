@@ -79,6 +79,9 @@ jobs:
           echo "matrix2=$matrix_origin2" >> $GITHUB_ENV
           echo $matrix2
 
+          echo "----- 그냥env 생성"
+          echo "dummy1=aaaa" >> $GITHUB_ENV
+
           echo "----- env 확인"
           env
           echo "----- export 확인"
@@ -86,6 +89,11 @@ jobs:
 
       - name: check
         run: |
+
+          echo "----- 그냥env 확인"
+          echo ${{env.dummy1}}
+          echo $dummy1
+
           echo "----- env 확인"
           env
           echo "----- export 확인"
