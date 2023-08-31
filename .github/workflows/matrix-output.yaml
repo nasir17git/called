@@ -20,11 +20,12 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ env.matrix }}
+      matrix: ${{ steps.make.outputs.matrix1 }}
     steps:
       - uses: actions/checkout@v3
 
       - name: check_inputs
+        id: make
         env:
           INPUTS: ${{ toJSON(inputs) }}
         run: | 
@@ -35,24 +36,24 @@ jobs:
           # 성공 케이스
           echo "----- 성공 케이스"
           echo "matrix={\"include\":[{\"module\":\"api\"},{\"module\":\"batch\"}]}"
-          # echo "matrix={\"include\":[{\"module\":\"api\"},{\"module\":\"batch\"}]}" >> $GITHUB_ENV
+          echo "matrix={\"include\":[{\"module\":\"api\"},{\"module\":\"batch\"}]}" >> "$GITHUB_OUTPUT"
 
           # test1
           echo "----- 변수로 넣었음"
           echo "matrix_origin1={\"include\":[{\"module\":\"api\"},{\"module\":\"batch\"}]}"
           echo $matrix_origin1
-          echo "matrix1=$matrix_origin1" >> $GITHUB_ENV
+          echo "matrix1=$matrix_origin1" >> "$GITHUB_OUTPUT"
           echo $matrix1
 
           # test2
           echo "----- \를 지웠음"
           echo "matrix_origin2={"include":[{"module":"api"},{"module":"batch"}]}"
           echo $matrix_origin2
-          echo "matrix2=$matrix_origin2" >> $GITHUB_ENV
+          echo "matrix2=$matrix_origin2" >> "$GITHUB_OUTPUT"
           echo $matrix2
 
           echo "----- 그냥env 생성"
-          echo "dummy1=aaaa" >> $GITHUB_ENV
+          echo "dummy1=aaaa" >> "$GITHUB_OUTPUT"
 
           echo "----- env 확인"
           env
@@ -60,18 +61,19 @@ jobs:
           export
 
       - name: check
+        id: check
         run: |
 
           echo "----- 그냥env 확인"
-          echo ${{env.dummy1}}
+          echo ${{steps.make.outputs.dummy1}}
           echo $dummy1
 
           echo "----- matrix data 확인"
-          echo ${{env.matrix}}
+          echo ${{steps.make.outputs.matrix}}
           echo $matrix
-          echo ${{env.matrix1}}
+          echo ${{steps.make.outputs.matrix1}}
           echo $matrix1
-          echo ${{env.matrix2}}
+          echo ${{steps.make.outputs.matrix2}}
           echo $matrix2
 
           echo "----- env 확인"
