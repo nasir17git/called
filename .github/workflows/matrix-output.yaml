@@ -14,7 +14,7 @@ on:
         type: string
     outputs:
       matrix:
-        value: ${{ jobs.setup.outputs.matrix0 }}
+        value: ${{ jobs.setup.outputs.matrix1 }}
 
 jobs:
   setup:
