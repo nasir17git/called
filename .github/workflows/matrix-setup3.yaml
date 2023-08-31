@@ -20,7 +20,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ env.matrix1 }}
+      matrix: ${{ env.matrix }}
     steps:
       - uses: actions/checkout@v3
 
@@ -37,9 +37,9 @@ jobs:
           echo "matrix_origin1={\"include\":[{\"module\":\"api\"},{\"module\":\"batch\"}]}"
           matrix_origin1={\"include\":[{\"module\":\"api\"},{\"module\":\"batch\"}]}
           echo $matrix_origin1
-          echo "matrix1=$matrix_origin1" >> $GITHUB_ENV
-          matrix1=$matrix_origin1
-          echo $matrix1
+          echo "matrix=$matrix_origin1" >> $GITHUB_ENV
+          matrix=$matrix_origin1
+          echo $matrix
 
           echo "----- env 확인"
           env
@@ -50,8 +50,8 @@ jobs:
         run: |
           echo "----- matrix data 확인"
 
-          echo ${{env.matrix1}}
-          echo $matrix1
+          echo ${{env.matrix}}
+          echo $matrix
 
           echo "----- env 확인"
           env
