@@ -32,12 +32,6 @@ jobs:
           echo "$INPUTS"
           echo "$INPUTS" >> inputs.json
 
-          # 성공 케이스
-          echo "----- 성공 케이스"
-          echo "matrix0={\"include\":[{\"module\":\"api\"},{\"module\":\"batch\"}]}"
-          echo $matrix0
-          echo "matrix0={\"include\":[{\"module\":\"api\"},{\"module\":\"batch\"}]}" >> $GITHUB_ENV
-
           # test1
           echo "----- 변수로 넣었음"
           echo "matrix_origin1={\"include\":[{\"module\":\"api\"},{\"module\":\"batch\"}]}"
@@ -47,22 +41,6 @@ jobs:
           matrix1=$matrix_origin1
           echo $matrix1
 
-          # test2
-          echo "----- \를 지웠음"
-          echo "matrix_origin2={"include":[{"module":"api"},{"module":"batch"}]}"
-          matrix_origin2={"include":[{"module":"api"},{"module":"batch"}]}
-          echo $matrix_origin2
-          echo "matrix2=$matrix_origin2" >> $GITHUB_ENV
-          matrix2=$matrix_origin2
-          echo $matrix2
-
-          echo "----- 그냥env 생성"
-          echo "dummy1=aaaa" >> $GITHUB_ENV
-          echo "dummy1=aaaa"
-          echo $dummy1
-          dummy1=bbbb
-          echo $dummy1
-
           echo "----- env 확인"
           env
           echo "----- export 확인"
@@ -70,22 +48,10 @@ jobs:
 
       - name: check
         run: |
-
-          echo "----- 그냥env 확인"
-          echo ${{env.dummy1}}
-          echo $dummy1
-
           echo "----- matrix data 확인"
-          echo ${{env.matrix0}}
-          echo $matrix0
-
 
           echo ${{env.matrix1}}
           echo $matrix1
-
-
-          echo ${{env.matrix2}}
-          echo $matrix2
 
           echo "----- env 확인"
           env
