@@ -23,6 +23,18 @@ jobs:
       matrix: ${{ env.mat_list }}
     steps:
       - uses: actions/checkout@v3
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
+      - name: verify_workflow
+        run: |
+          echo "static"
+          echo "https://github.com/nasir17git/called/tree/2b0371a22d5cfb7f1efb264c102cdc0199af6045"
+          echo "env"
+          echo "${{ github.event.repository.html_url }}/tree/${{github.sha}}"
+          echo "저 gitsha는 caller?called?"
 
       - name: check_inputs
         env:
@@ -63,12 +75,12 @@ jobs:
           if [ ${{ inputs.MODULE_ALL }} == "true" ]; then
             filtered_modules=$(cat inputs.json | jq -rc 'with_entries(select(.key | startswith("DEPLOY_"))) | to_entries | map({module: .key})')
             mat_list="{\"include\":$filtered_modules}"
-            matrix_with_sed=$(echo "$mat_list" | sed 's/DEPLOY_//g')
+            matrix_with_sed=$(echo "$mat_list" | sed 's/"/\\\"/g' | sed 's/DEPLOY_//g')
             echo $matrix_with_sed
           else 
             filtered_modules=$(cat inputs.json | jq -rc 'with_entries(select(.key | startswith("DEPLOY_"))) | to_entries | map(select(.value == true)) | map({module: .key})')
             mat_list="{\"include\":$filtered_modules}"
-            matrix_with_sed=$(echo "$mat_list" | sed 's/DEPLOY_//g')
+            matrix_with_sed=$(echo "$mat_list" | sed 's/"/\\\"/g' | sed 's/DEPLOY_//g')
             echo $matrix_with_sed
           fi
 
