@@ -23,82 +23,31 @@ jobs:
       matrix: ${{ env.mat_list }}
     steps:
       - uses: actions/checkout@v3
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: |
-          echo "$GITHUB_CONTEXT"
-      - name: verify_workflow
-        run: |
-          echo "static"
-          echo "https://github.com/nasir17git/called/tree/2b0371a22d5cfb7f1efb264c102cdc0199af6045"
-          echo "env"
-          echo "${{ github.event.repository.html_url }}/tree/${{github.sha}}"
-          echo "저 gitsha는 caller?called?"
-
-      - name: check_inputs
-        env:
-          INPUTS: ${{ toJSON(inputs) }}
-        run: | 
-          echo "----- env"
-          echo "$INPUTS"
-          echo "$INPUTS" >> inputs.json
-
-          # test1
-          echo "----- 변수로 넣었음"
-          echo "matrix_origin1={\"include\":[{\"module\":\"api\"},{\"module\":\"batch\"}]}"
-          matrix_origin1={\"include\":[{\"module\":\"api\"},{\"module\":\"batch\"}]}
-          echo $matrix_origin1
-          echo "matrix=$matrix_origin1" >> $GITHUB_ENV
-          matrix=$matrix_origin1
-          echo $matrix
-
-          echo "----- env 확인"
-          env
-          echo "----- export 확인"
-          export
-
-      - name: check
-        run: |
-          echo "----- matrix data 확인"
-
-          echo ${{env.matrix}}
-          echo $matrix
-
-          echo "----- env 확인"
-          env
-          echo "----- export 확인"
-          export
 
       - name: main 
         run: |
           if [ ${{ inputs.MODULE_ALL }} == "true" ]; then
-            filtered_modules=$(cat inputs.json | jq -rc 'with_entries(select(.key | startswith("DEPLOY_"))) | to_entries | map({module: .key})')
+            filtered_modules=$(cat inputs.json | jq 'with_entries(select(.key | startswith("DEPLOY_"))) | to_entries | map({module: .key})')
             mat_list="{\"include\":$filtered_modules}"
             matrix_with_sed=$(echo "$mat_list" | sed 's/DEPLOY_//g')
-            echo $matrix_with_sed
+            echo $matrix_with_sed >> matrix.json
           else 
-            filtered_modules=$(cat inputs.json | jq -rc 'with_entries(select(.key | startswith("DEPLOY_"))) | to_entries | map(select(.value == true)) | map({module: .key})')
+            filtered_modules=$(cat inputs.json | jq -r 'with_entries(select(.key | startswith("DEPLOY_"))) | to_entries | map(select(.value == true)) | map({module: .key})')
             mat_list="{\"include\":$filtered_modules}"
             matrix_with_sed=$(echo "$mat_list" | sed 's/DEPLOY_//g')
-            echo $matrix_with_sed
+            echo $matrix_with_sed >> matrix.json
           fi
 
-          echo "mat_list=${matrix_with_sed}" >> $GITHUB_ENV
-          mat_list=$matrix_with_sed
-          echo $mat_list
+          cat matrix.json
+          echo "mat_list=$(cat matrix.json)" >> $GITHUB_ENV
 
-      - name: finalize
+      # - name: transfer_json
+      #   run: |
+      #     echo "--- 기존 입력"
+      #     cat matrix.json >> $GITHUB_ENV
+      
+      - name: check
         run: |
-          echo "--- 기존 입력"
-          echo $matrix
-          echo ${{env.matrix}}
-
-
-          echo "--- if문 생성"
-          echo $mat_list
-          echo ${{env.mat_list}}
-          
-          
+          echo "${{env.mat_list}}" 
           
 
