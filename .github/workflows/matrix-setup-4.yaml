@@ -24,6 +24,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: check_inputs
+        env:
+          INPUTS: ${{ toJSON(inputs) }}
+        run: | 
+          echo "----- env"
+          echo "$INPUTS"
+          echo "$INPUTS" >> inputs.json
+
       - name: main 
         run: |
           if [ ${{ inputs.MODULE_ALL }} == "true" ]; then
